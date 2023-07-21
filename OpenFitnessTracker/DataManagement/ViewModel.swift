@@ -23,8 +23,10 @@ class ViewModel: ObservableObject {
     }
 
     // MARK: Values
+
     @Published var strengthWorkoutEntries = [StrengthWorkoutEntry]()
     @Published var enduranceWorkoutEntries =  [EnduranceWorkoutEntry]()
+    var settings = Settings()
 
     // MARK: Data Query Handling
 
@@ -35,24 +37,8 @@ class ViewModel: ObservableObject {
     @MainActor
     func getData() async throws {
         self.isInQuery = true
-        // TODO: replace with actual value change
+        // TODO: replace with actual value change and DB calls
         try await Task.sleep(nanoseconds: 2 * 1_000_000_000)
         self.isInQuery = false
     }
 }
-
-// TODO: Manage via settings page at first and afterwards via integrated DB
-
-var strengthWorkoutNames = [
-    "Bench Press",
-    "Deadlift",
-    "Bicep Curl",
-    "Overhead Press",
-    "Hammercurl",
-    "Pull-up"
-]
-var enduranceWorkoutNames = [
-    "Jogging",
-    "Cycling",
-    "Swimming"
-]

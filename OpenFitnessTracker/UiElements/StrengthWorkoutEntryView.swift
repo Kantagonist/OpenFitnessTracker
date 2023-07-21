@@ -41,23 +41,15 @@ struct StrengthWorkoutEntryView: View {
                         }
                     })
                     .foregroundColor(textColor)
-                    Stepper("Sets: \(sets)", value: $sets, step: 1)
+                    Stepper("Sets: \(sets)", value: $sets, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
                         .foregroundColor(textColor)
-                    Stepper("Reps: \(reps)", value: $reps, step: 1)
+                    Stepper("Reps: \(reps)", value: $reps, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
                         .foregroundColor(textColor)
-                    Stepper("Weight: \(String(format: "%.1f", weight)) kg", onIncrement: {
-                        weight += weightIncrement
-                    }, onDecrement:  {
-                        if (weight - weightIncrement < 0) {
-                            weight = 0
-                        } else {
-                            weight -= 2.5
-                        }
-                    })
+                    Stepper("Weight: \(String(format: "%.1f", weight)) kg", value: $weight, in: 0...Double(Int.max), step: 2.5)
                     .padding(.top)
                     .padding(.bottom)
                     .foregroundColor(textColor)

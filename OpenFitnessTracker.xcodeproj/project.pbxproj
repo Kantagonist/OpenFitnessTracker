@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4C35AF9D2A1CFBC500DA3204 /* PersonalInformationSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35AF9C2A1CFBC500DA3204 /* PersonalInformationSceneView.swift */; };
+		4C373C7A2A66B265008AD251 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C373C792A66B265008AD251 /* SettingsView.swift */; };
 		4C81AADF2A051BEA0095D519 /* OpenFitnessTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AADE2A051BEA0095D519 /* OpenFitnessTrackerApp.swift */; };
 		4C81AAE12A051BEA0095D519 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AAE02A051BEA0095D519 /* ContentView.swift */; };
 		4C81AAE32A051BEB0095D519 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4C81AAE22A051BEB0095D519 /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 
 /* Begin PBXFileReference section */
 		4C35AF9C2A1CFBC500DA3204 /* PersonalInformationSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalInformationSceneView.swift; sourceTree = "<group>"; };
+		4C373C792A66B265008AD251 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		4C81AADB2A051BEA0095D519 /* OpenFitnessTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenFitnessTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4C81AADE2A051BEA0095D519 /* OpenFitnessTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFitnessTrackerApp.swift; sourceTree = "<group>"; };
 		4C81AAE02A051BEA0095D519 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 			children = (
 				4C35AF9C2A1CFBC500DA3204 /* PersonalInformationSceneView.swift */,
 				4CE241222A1DFD3F006080B3 /* WorkoutInputSceneView.swift */,
+				4C373C792A66B265008AD251 /* SettingsView.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4CE241282A1E024B006080B3 /* WorkoutDataStructs.swift in Sources */,
+				4C373C7A2A66B265008AD251 /* SettingsView.swift in Sources */,
 				4CE241252A1DFD72006080B3 /* ViewModel.swift in Sources */,
 				4C81AAE12A051BEA0095D519 /* ContentView.swift in Sources */,
 				4C81AADF2A051BEA0095D519 /* OpenFitnessTrackerApp.swift in Sources */,
@@ -473,7 +477,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.henrikhatje.OpenFitnessTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kantagonist.OpenFitnessTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -501,7 +505,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.henrikhatje.OpenFitnessTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kantagonist.OpenFitnessTracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -519,7 +523,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.henrikhatje.OpenFitnessTrackerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kantagonist.OpenFitnessTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -538,7 +542,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.henrikhatje.OpenFitnessTrackerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kantagonist.OpenFitnessTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -555,7 +559,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.henrikhatje.OpenFitnessTrackerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kantagonist.OpenFitnessTrackerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
@@ -572,7 +576,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = de.henrikhatje.OpenFitnessTrackerUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = de.kantagonist.OpenFitnessTrackerUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
