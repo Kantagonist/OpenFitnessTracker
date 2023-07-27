@@ -10,7 +10,7 @@ import SwiftUI
 /// new settings page, which allows for
 struct SettingsView: View {
 
-    @State private var viewModel = ViewModel.getInstance()
+    @StateObject private var viewModel = ViewModel.getInstance()
 
     // MARK: Main View
 

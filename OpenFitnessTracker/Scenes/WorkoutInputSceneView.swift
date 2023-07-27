@@ -11,7 +11,7 @@ import SwiftUI
 struct WorkoutInputSceneView: View {
 
     /// Source of truth for workout-entries
-    @State private var viewModel = ViewModel.getInstance()
+    @StateObject private var viewModel = ViewModel.getInstance()
 
     /// Boolean to control popover workout entry screen trigger
     @State private var isShowingEntryForm = false
