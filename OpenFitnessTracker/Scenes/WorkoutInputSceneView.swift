@@ -19,15 +19,29 @@ struct WorkoutInputSceneView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                HStack {
-                    Text("No Entries Yet...")
-                    Spacer()
+                VStack {
+                    if viewModel.strengthWorkoutEntries.count <= 0 {
+                        HStack {
+                            Text("No Entries Yet...")
+                            Spacer()
+                        }
+                    } else {
+                        ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
+                            StrengthEntryStatisticsBoxView(
+                                entry: strengthWorkoutEntry,
+                                settings: viewModel.settings
+                            )
+                        }
+                    }
                 }
             }.padding(16)
             Button("+") {
                 isShowingEntryForm = true
             }.popover(isPresented: $isShowingEntryForm) {
-                StrengthWorkoutEntryView(existingEntries: $viewModel.strengthWorkoutEntries, isPresented: $isShowingEntryForm)
+                StrengthWorkoutEntryView(
+                    existingEntries: $viewModel.strengthWorkoutEntries,
+                    isPresented: $isShowingEntryForm
+                )
             }
             .frame(width: 50.0, height: 50.0)
                 .foregroundColor(Color.white)

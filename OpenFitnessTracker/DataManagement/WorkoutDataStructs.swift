@@ -8,7 +8,9 @@
 import Foundation
 
 /// A data representation of a given workout statistic
-class WorkoutEntry {
+class WorkoutEntry: Identifiable {
+    let id = UUID()
+
     let name: String
     let timestamp: Date
     init(name: String, timestamp: Date) {
