@@ -27,7 +27,7 @@ struct WorkoutInputSceneView: View {
                         }
                     } else {
                         ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
-                            StrengthEntryStatisticsBoxView(
+                            StrengthEntryBoxView(
                                 entry: strengthWorkoutEntry,
                                 settings: viewModel.settings
                             )
@@ -40,7 +40,8 @@ struct WorkoutInputSceneView: View {
             }.popover(isPresented: $isShowingEntryForm) {
                 StrengthWorkoutEntryView(
                     existingEntries: $viewModel.strengthWorkoutEntries,
-                    isPresented: $isShowingEntryForm
+                    isPresented: $isShowingEntryForm,
+                    settings: viewModel.settings
                 )
             }
             .frame(width: 50.0, height: 50.0)

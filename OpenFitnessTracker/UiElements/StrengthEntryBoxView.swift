@@ -9,7 +9,7 @@ import SwiftUI
 
 /// A small box which is read-only.
 /// It displays information from a given ``StrengthWorkoutEntry``.
-struct StrengthEntryStatisticsBoxView: View {
+struct StrengthEntryBoxView: View {
     
     let entry: StrengthWorkoutEntry
     let settings: Settings
@@ -40,7 +40,7 @@ struct StrengthEntryStatisticsBoxView: View {
                     .frame(maxWidth: .infinity)
                     .border(Color.black)
             }
-            Text("\(String(format: "%.2f", entry.weight)) \(settings.weightUnit.rawValue)")
+            Text("\(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.weightUnit))) \(settings.weightUnit.rawValue)")
                 .font(.system(size: 24))
                 .padding()
                 .frame(maxWidth: .infinity)
@@ -56,7 +56,8 @@ private let demoEntry = StrengthWorkoutEntry(
     timestamp: Date(),
     sets: 3,
     reps: 8,
-    weight: 30.0
+    weight: 30.0,
+    recordedWeightUnit: .kg
 )
 
 private let demoSettings = Settings(
@@ -67,7 +68,7 @@ private let demoSettings = Settings(
 struct StrengthEntryStatisticsBox_Previews: PreviewProvider {
 
     static var previews: some View {
-        StrengthEntryStatisticsBoxView(
+        StrengthEntryBoxView(
             entry: demoEntry,
             settings: demoSettings
         )

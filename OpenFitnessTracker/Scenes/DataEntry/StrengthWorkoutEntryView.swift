@@ -17,6 +17,7 @@ struct StrengthWorkoutEntryView: View {
     // This binding is used to manipulate the original source of truth.
     @Binding var existingEntries: [StrengthWorkoutEntry]
     @Binding var isPresented: Bool
+    let settings: Settings
 
     // Form Entry state variables
     @State private var date = Date()
@@ -49,7 +50,7 @@ struct StrengthWorkoutEntryView: View {
                         .padding(.top)
                         .padding(.bottom)
                         .foregroundColor(textColor)
-                    Stepper("Weight: \(String(format: "%.1f", weight)) kg", value: $weight, in: 0...Double(Int.max), step: 2.5)
+                    Stepper("Weight: \(String(format: "%.1f", weight)) \(settings.weightUnit.rawValue)", value: $weight, in: 0...Double(Int.max), step: 2.5)
                     .padding(.top)
                     .padding(.bottom)
                     .foregroundColor(textColor)
@@ -65,7 +66,8 @@ struct StrengthWorkoutEntryView: View {
                         timestamp: date,
                         sets: sets,
                         reps: reps,
-                        weight: weight
+                        weight: weight,
+                        recordedWeightUnit: settings.weightUnit
                     )
                 )
                 isPresented = false
@@ -88,11 +90,17 @@ private let textColor: Color = .black
 private let weightIncrement: Double = 2.5
 
 // MARK: Preview
+
 struct WorkoutEntryView_Previews: PreviewProvider {
     @State private static var entries = [StrengthWorkoutEntry]()
     @State private static var show = true
+    private static let settings = Settings()
 
     static var previews: some View {
-        StrengthWorkoutEntryView(existingEntries: $entries, isPresented: $show)
+        StrengthWorkoutEntryView(
+            existingEntries: $entries,
+            isPresented: $show,
+            settings: settings
+        )
     }
 }

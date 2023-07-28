@@ -23,13 +23,31 @@ class WorkoutEntry: Identifiable {
 class StrengthWorkoutEntry: WorkoutEntry {
     let sets: Int
     let reps: Int
-    let weight: Double
+    private let weight: Double
+    let recordedWeightUnit: WeightUnit
 
-    init(name: String, timestamp: Date, sets: Int, reps: Int, weight: Double) {
+    init(name: String, timestamp: Date, sets: Int, reps: Int, weight: Double, recordedWeightUnit: WeightUnit) {
         self.sets = sets
         self.reps = reps
         self.weight = weight
+        self.recordedWeightUnit = recordedWeightUnit
         super.init(name: name, timestamp: timestamp)
+    }
+
+    /// Gets the structs distance converted to the given distance unit.
+    /// - Parameters:
+    ///   - distanceUnit: The unit to convert the value into
+    /// - Returns: The converted value as a Double
+    func getConvertedDistanceUnit(for weightUnit: WeightUnit) -> Double {
+        if weightUnit == recordedWeightUnit {
+            return weight
+        }
+        switch weightUnit {
+        case .kg:
+            return weight * 0.45359237
+        case .lbs:
+            return weight * 2.20462262185
+        }
     }
 }
 
