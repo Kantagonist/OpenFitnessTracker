@@ -38,8 +38,9 @@ struct WorkoutInputSceneView: View {
             Button("+") {
                 isShowingEntryForm = true
             }.popover(isPresented: $isShowingEntryForm) {
-                StrengthWorkoutEntryView(
-                    existingEntries: $viewModel.strengthWorkoutEntries,
+                ChooseDataEntryView(
+                    existingStrengthEntries: $viewModel.strengthWorkoutEntries,
+                    existingEnduranceEntries: $viewModel.enduranceWorkoutEntries,
                     isPresented: $isShowingEntryForm,
                     settings: viewModel.settings
                 )

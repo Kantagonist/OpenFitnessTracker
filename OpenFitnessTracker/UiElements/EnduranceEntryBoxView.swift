@@ -33,7 +33,7 @@ struct EnduranceEntryBoxView: View {
                 .padding()
                 .frame(maxWidth: .infinity)
                 .border(Color.black)
-            Text("Distance \(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.distanceUnit))) \(settings.weightUnit.rawValue)")
+            Text("Distance \(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.distanceUnit))) \(settings.distanceUnit.rawValue)")
                 .font(.system(size: 24))
                 .padding()
                 .frame(maxWidth: .infinity)
