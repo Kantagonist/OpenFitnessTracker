@@ -36,9 +36,9 @@ class StrengthWorkoutEntry: WorkoutEntry {
 
     /// Gets the structs distance converted to the given distance unit.
     /// - Parameters:
-    ///   - distanceUnit: The unit to convert the value into
+    ///   - weightUnit: The unit to convert the value into
     /// - Returns: The converted value as a Double
-    func getConvertedDistanceUnit(for weightUnit: WeightUnit) -> Double {
+    func getConvertedWeightUnit(for weightUnit: WeightUnit) -> Double {
         if weightUnit == recordedWeightUnit {
             return weight
         }
@@ -77,5 +77,31 @@ class EnduranceWorkoutEntry: WorkoutEntry {
         case .mile:
             return distance * 0.6213711922
         }
+    }
+
+    /// Formats the milliseconds duration of this entry into a readable String.
+    func getFormattedDurationString() -> String {
+        var remainingMS = durationInMilliseconds
+        let hourInMilliseconds: UInt64 = 3_600_000
+        let minuteInMilliseconds: UInt64 = 60_000
+        let secondInMilliseconds: UInt64 = 1_000
+
+        var hours = "00:"
+        if remainingMS >= hourInMilliseconds {
+            hours = "\(String(remainingMS / hourInMilliseconds)):"
+            remainingMS = remainingMS % hourInMilliseconds
+        }
+        var minutes = "00:"
+        if remainingMS >= minuteInMilliseconds {
+            minutes = "\(remainingMS / minuteInMilliseconds):"
+            remainingMS = remainingMS % minuteInMilliseconds
+        }
+        var seconds = "00:"
+        if remainingMS >= secondInMilliseconds {
+            seconds = "\(remainingMS / secondInMilliseconds):"
+            remainingMS = remainingMS % secondInMilliseconds
+        }
+        
+        return hours + minutes + seconds + String(format: "%04d", remainingMS)
     }
 }

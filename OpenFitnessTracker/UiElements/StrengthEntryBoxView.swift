@@ -40,7 +40,7 @@ struct StrengthEntryBoxView: View {
                     .frame(maxWidth: .infinity)
                     .border(Color.black)
             }
-            Text("\(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.weightUnit))) \(settings.weightUnit.rawValue)")
+            Text("\(String(format: "%.2f", entry.getConvertedWeightUnit(for: settings.weightUnit))) \(settings.weightUnit.rawValue)")
                 .font(.system(size: 24))
                 .padding()
                 .frame(maxWidth: .infinity)
