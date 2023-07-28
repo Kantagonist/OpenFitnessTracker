@@ -15,17 +15,19 @@ struct ChooseDataEntryView: View {
     @Binding var isPresented: Bool
     let settings: Settings
 
-    @State private var entryShown: Entry = .Strength
+    @State private var entryShown: EntryType = .Strength
     
     // MARK: View
 
     var body: some View {
         VStack {
             Picker("", selection: $entryShown) {
-                ForEach(Entry.allCases, id: \.self) { entryName in
+                ForEach(EntryType.allCases, id: \.self) { entryName in
                     Text("\(entryName.rawValue)")
                 }
-            }.pickerStyle(.segmented)
+            }
+            .pickerStyle(.segmented)
+            .padding(EdgeInsets(top: 16.0, leading: 0.0, bottom: 16.0, trailing: 0.0))
             switch entryShown {
             case .Strength:
                 StrengthWorkoutEntryView(
@@ -41,11 +43,6 @@ struct ChooseDataEntryView: View {
                 )
             }
         }
-    }
-    
-    private enum Entry: String, CaseIterable {
-        case Strength
-        case Endurance
     }
 }
 

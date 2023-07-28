@@ -15,22 +15,51 @@ struct WorkoutInputSceneView: View {
 
     /// Boolean to control popover workout entry screen trigger
     @State private var isShowingEntryForm = false
+    /// Shows which entries to show
+    @State private var entryShown: EntryType = .Strength
 
     var body: some View {
         ZStack {
             ScrollView {
                 VStack {
-                    if viewModel.strengthWorkoutEntries.count <= 0 {
-                        HStack {
-                            Text("No Entries Yet...")
-                            Spacer()
+                    // Picker for choosing which entries to see
+                    Picker("", selection: $entryShown) {
+                        ForEach(EntryType.allCases, id: \.self) { entryName in
+                            Text("\(entryName.rawValue)")
                         }
-                    } else {
-                        ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
-                            StrengthEntryBoxView(
-                                entry: strengthWorkoutEntry,
-                                settings: viewModel.settings
-                            )
+                    }
+                    .pickerStyle(.segmented)
+                    .padding(EdgeInsets(top: 16.0, leading: 0.0, bottom: 16.0, trailing: 0.0))
+                    
+                    // Render chosen entries
+                    switch entryShown {
+                    case .Strength:
+                        if viewModel.strengthWorkoutEntries.count <= 0 {
+                            HStack {
+                                Text("No Entries Yet...")
+                                Spacer()
+                            }
+                        } else {
+                            ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
+                                StrengthEntryBoxView(
+                                    entry: strengthWorkoutEntry,
+                                    settings: viewModel.settings
+                                )
+                            }
+                        }
+                    case .Endurance:
+                        if viewModel.enduranceWorkoutEntries.count <= 0 {
+                            HStack {
+                                Text("No Entries Yet...")
+                                Spacer()
+                            }
+                        } else {
+                            ForEach(viewModel.enduranceWorkoutEntries) { enduranceWorkoutEntry in
+                                EnduranceEntryBoxView(
+                                    entry: enduranceWorkoutEntry,
+                                    settings: viewModel.settings
+                                )
+                            }
                         }
                     }
                 }

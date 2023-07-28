@@ -105,3 +105,8 @@ class EnduranceWorkoutEntry: WorkoutEntry {
         return hours + minutes + seconds + String(format: "%04d", remainingMS)
     }
 }
+
+enum EntryType: String, CaseIterable {
+    case Strength
+    case Endurance
+}
