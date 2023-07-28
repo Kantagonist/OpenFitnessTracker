@@ -11,25 +11,55 @@ import SwiftUI
 /// It displays information from a given ``StrengthWorkoutEntry``.
 struct StrengthEntryStatisticsBoxView: View {
     
-    var entry: StrengthWorkoutEntry
-    var settings: Settings
+    let entry: StrengthWorkoutEntry
+    let settings: Settings
 
     var body: some View {
-        Text("You performed the exercise: \(entry.name)\nOn \(entry.timestamp)\nWith \(entry.sets) sets of \(entry.reps) reps while using \(String(format: "%.1f", entry.weight)) \(settings.weightUnit.rawValue)")
+        VStack(spacing: 0) {
+            HStack(spacing: 0) {
+                Text("\(entry.name)")
+                    .font(.system(size: 16))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .border(Color.black)
+                Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
+                    .font(.system(size: 16))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .border(Color.black)
+            }
+            HStack(spacing: 0) {
+                Text("Sets: \(entry.sets)")
+                    .font(.system(size: 16))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .border(Color.black)
+                Text("Reps: \(entry.reps)")
+                    .font(.system(size: 16))
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .border(Color.black)
+            }
+            Text("\(String(format: "%.2f", entry.weight)) \(settings.weightUnit.rawValue)")
+                .font(.system(size: 24))
+                .padding()
+                .frame(maxWidth: .infinity)
+                .border(Color.black)
+        }
     }
 }
 
 // MARK: Preview
 
-let demoEntry = StrengthWorkoutEntry(
-    name: "Bench",
+private let demoEntry = StrengthWorkoutEntry(
+    name: "Bench Press",
     timestamp: Date(),
     sets: 3,
     reps: 8,
     weight: 30.0
 )
 
-let demoSettings = Settings(
+private let demoSettings = Settings(
     weightUnit: .kg,
     distanceUnit: .km
 )
