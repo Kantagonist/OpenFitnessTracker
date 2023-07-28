@@ -9,8 +9,8 @@ import SwiftUI
 
 // MARK: View
 
-/// An entry form which allows the user to enter his workout data.
-/// Uses a binding to add to a given list of workouts.
+/// An entry form which allows the user to enter his strength workout data.
+/// Uses a binding to add to a given list of workouts in the model.
 struct StrengthWorkoutEntryView: View {
 
     // References the existing central list of workout entries.

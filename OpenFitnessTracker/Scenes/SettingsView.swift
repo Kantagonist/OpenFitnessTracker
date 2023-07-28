@@ -52,6 +52,7 @@ struct Settings {
     var distanceUnit: DistanceUnit = .km
     let strWorkouts = strengthWorkoutNames
     let endWorkouts = enduranceWorkoutNames
+    let textColor = Color.black
 }
 
 var strengthWorkoutNames = [

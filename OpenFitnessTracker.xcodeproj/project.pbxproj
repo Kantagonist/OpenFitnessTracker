@@ -21,6 +21,7 @@
 		4CE241232A1DFD3F006080B3 /* WorkoutInputSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE241222A1DFD3F006080B3 /* WorkoutInputSceneView.swift */; };
 		4CE241252A1DFD72006080B3 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE241242A1DFD72006080B3 /* ViewModel.swift */; };
 		4CE241282A1E024B006080B3 /* WorkoutDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE241272A1E024B006080B3 /* WorkoutDataStructs.swift */; };
+		4CE9D3EC2A740E7900942190 /* EnduranceWorkoutEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE9D3EB2A740E7900942190 /* EnduranceWorkoutEntryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		4CE241222A1DFD3F006080B3 /* WorkoutInputSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInputSceneView.swift; sourceTree = "<group>"; };
 		4CE241242A1DFD72006080B3 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		4CE241272A1E024B006080B3 /* WorkoutDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutDataStructs.swift; sourceTree = "<group>"; };
+		4CE9D3EB2A740E7900942190 /* EnduranceWorkoutEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnduranceWorkoutEntryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 		4C35AF9B2A1CFBB000DA3204 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				4CE9D3ED2A740EA900942190 /* DataEntry */,
 				4C35AF9C2A1CFBC500DA3204 /* PersonalInformationSceneView.swift */,
 				4CE241222A1DFD3F006080B3 /* WorkoutInputSceneView.swift */,
 				4C373C792A66B265008AD251 /* SettingsView.swift */,
@@ -166,10 +169,18 @@
 		4CE241292A1E06D1006080B3 /* UiElements */ = {
 			isa = PBXGroup;
 			children = (
-				4CDD84C72A29FB9100F229CF /* StrengthWorkoutEntryView.swift */,
 				4CA7AB922A72898B0073FE31 /* StrengthEntryStatisticsBoxView.swift */,
 			);
 			path = UiElements;
+			sourceTree = "<group>";
+		};
+		4CE9D3ED2A740EA900942190 /* DataEntry */ = {
+			isa = PBXGroup;
+			children = (
+				4CDD84C72A29FB9100F229CF /* StrengthWorkoutEntryView.swift */,
+				4CE9D3EB2A740E7900942190 /* EnduranceWorkoutEntryView.swift */,
+			);
+			path = DataEntry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,6 +318,7 @@
 				4CE241252A1DFD72006080B3 /* ViewModel.swift in Sources */,
 				4C81AAE12A051BEA0095D519 /* ContentView.swift in Sources */,
 				4C81AADF2A051BEA0095D519 /* OpenFitnessTrackerApp.swift in Sources */,
+				4CE9D3EC2A740E7900942190 /* EnduranceWorkoutEntryView.swift in Sources */,
 				4CA7AB932A72898B0073FE31 /* StrengthEntryStatisticsBoxView.swift in Sources */,
 				4CE241232A1DFD3F006080B3 /* WorkoutInputSceneView.swift in Sources */,
 				4CDD84C82A29FB9100F229CF /* StrengthWorkoutEntryView.swift in Sources */,
