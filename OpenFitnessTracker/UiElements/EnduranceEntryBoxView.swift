@@ -16,28 +16,29 @@ struct EnduranceEntryBoxView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text("\(entry.name)")
-                    .font(.system(size: 16))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .border(settings.textColor)
-                Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
-                    .font(.system(size: 16))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .border(settings.textColor)
-            }
+            WorkoutEntryHeaderView(entry: entry, settings: settings)
             Text("Time: \(entry.getFormattedDurationString())")
-                .font(.system(size: 24))
-                .padding()
+                .font(.system(size: 20))
+                .padding(16.0)
                 .frame(maxWidth: .infinity)
-                .border(settings.textColor)
+                .overlay(
+                    SelectedBorderShape(
+                        sides: [.leading, .trailing, .bottom],
+                        cornerRadius: 20.0
+                    )
+                    .stroke(settings.textColor, lineWidth: 1.0)
+                )
             Text("Distance \(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.distanceUnit))) \(settings.distanceUnit.rawValue)")
-                .font(.system(size: 24))
-                .padding()
+                .font(.system(size: 20))
+                .padding(16.0)
                 .frame(maxWidth: .infinity)
-                .border(settings.textColor)
+                .overlay(
+                    SelectedBorderShape(
+                        sides: [.leading, .trailing, .bottom],
+                        cornerRadius: 20.0
+                    )
+                    .stroke(settings.textColor, lineWidth: 1.0)
+                )
         }
     }
 }

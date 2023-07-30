@@ -27,7 +27,7 @@ struct WorkoutEntryHeaderView: View {
                 .foregroundColor(settings.headerTextColor)
                 .padding()
         }
-        .padding(16.0)
+        .padding(10.0)
         .background(settings.headerBackgroundColor)
         .shadow(color: settings.headerBackgroundColor, radius: 10, x: 0, y: 0)
     }

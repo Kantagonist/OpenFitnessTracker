@@ -21,7 +21,7 @@ struct WorkoutInputSceneView: View {
     var body: some View {
         ZStack {
             ScrollView {
-                VStack {
+                VStack(spacing: 10.0) {
                     // Picker for choosing which entries to see
                     Picker("", selection: $entryShown) {
                         ForEach(EntryType.allCases, id: \.self) { entryName in

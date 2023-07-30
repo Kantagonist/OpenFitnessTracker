@@ -16,35 +16,42 @@ struct StrengthEntryBoxView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                Text("\(entry.name)")
-                    .font(.system(size: 16))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .border(settings.textColor)
-                Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
-                    .font(.system(size: 16))
-                    .padding()
-                    .frame(maxWidth: .infinity)
-                    .border(settings.textColor)
-            }
+            WorkoutEntryHeaderView(entry: entry, settings: settings)
             HStack(spacing: 0) {
                 Text("Sets: \(entry.sets)")
-                    .font(.system(size: 16))
-                    .padding()
+                    .foregroundColor(settings.textColor)
+                    .font(.system(size: 20))
+                    .padding(16.0)
                     .frame(maxWidth: .infinity)
-                    .border(settings.textColor)
+                    .overlay(
+                        SelectedBorderShape(
+                            sides: [.leading, .trailing, .bottom]
+                        )
+                        .stroke(settings.textColor, lineWidth: 1.0)
+                    )
                 Text("Reps: \(entry.reps)")
-                    .font(.system(size: 16))
-                    .padding()
+                    .foregroundColor(settings.textColor)
+                    .font(.system(size: 20))
+                    .padding(16.0)
                     .frame(maxWidth: .infinity)
-                    .border(settings.textColor)
+                    .overlay(
+                        SelectedBorderShape(
+                            sides: [.trailing, .bottom]
+                        )
+                        .stroke(settings.textColor, lineWidth: 1.0)
+                    )
             }
             Text("\(String(format: "%.2f", entry.getConvertedWeightUnit(for: settings.weightUnit))) \(settings.weightUnit.rawValue)")
-                .font(.system(size: 24))
-                .padding()
+                .foregroundColor(settings.textColor)
+                .font(.system(size: 20))
+                .padding(16.0)
                 .frame(maxWidth: .infinity)
-                .border(settings.textColor)
+                .overlay(
+                    SelectedBorderShape(
+                        sides: [.leading, .trailing, .bottom]
+                    )
+                    .stroke(settings.textColor, lineWidth: 1.0)
+                )
         }
     }
 }
