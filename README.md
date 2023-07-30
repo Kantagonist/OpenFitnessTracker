@@ -22,16 +22,16 @@ In the future, i hope to implement changes and improvements to the system.
 The following is a small list of features, i hope to incorporate.
 
 Short-term goals:
-- Integrating a delete button, which lets you delete workouts at runtime
-- A more beautiful UI for the Workout entry displays ✓
-- Unified settings & more expansive Settings
-- Adjustable personal information
+- [ ] Integrating a delete button, which lets you delete workouts at runtime
+- [x] A more beautiful UI for the Workout entry displays
+- [ ] Unified settings & more expansive Settings
+- [ ] Adjustable personal information
 
 Long-term goals:
-- Integrate a Database functionality for saving and deleting workout locally
-- Linting and comprehensive documentation in the code
-- Turn the Personal information page into statistics page
-- Integrate Apple's Health app.
+- [ ] Integrate a Database functionality for saving and deleting workout locally
+- [ ] Linting and comprehensive documentation in the code
+- [ ] Turn the Personal information page into statistics page
+- [ ] Integrate Apple's Health app.
 
 ## Licensing
 
