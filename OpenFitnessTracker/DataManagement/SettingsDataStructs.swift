@@ -14,7 +14,9 @@ struct Settings {
     var distanceUnit: DistanceUnit = .km
     let strWorkouts = strengthWorkoutNames
     let endWorkouts = enduranceWorkoutNames
-    let textColor = Color.black
+    let textColor = Color("TextColor")
+    let headerTextColor = Color("HeaderText")
+    let headerBackgroundColor = Color("HeaderBackground")
 }
 
 var strengthWorkoutNames = [

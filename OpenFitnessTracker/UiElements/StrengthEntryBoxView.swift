@@ -21,30 +21,30 @@ struct StrengthEntryBoxView: View {
                     .font(.system(size: 16))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .border(settings.textColor)
                 Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
                     .font(.system(size: 16))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .border(settings.textColor)
             }
             HStack(spacing: 0) {
                 Text("Sets: \(entry.sets)")
                     .font(.system(size: 16))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .border(settings.textColor)
                 Text("Reps: \(entry.reps)")
                     .font(.system(size: 16))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .border(settings.textColor)
             }
             Text("\(String(format: "%.2f", entry.getConvertedWeightUnit(for: settings.weightUnit))) \(settings.weightUnit.rawValue)")
                 .font(.system(size: 24))
                 .padding()
                 .frame(maxWidth: .infinity)
-                .border(Color.black)
+                .border(settings.textColor)
         }
     }
 }

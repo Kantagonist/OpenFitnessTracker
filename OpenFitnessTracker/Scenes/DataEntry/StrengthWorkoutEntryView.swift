@@ -31,7 +31,7 @@ struct StrengthWorkoutEntryView: View {
             Form {
                 Section(content: {
                     DatePicker("Date:", selection: $date, displayedComponents: .date)
-                        .foregroundColor(textColor)
+                        .foregroundColor(settings.textColor)
                 }, header: {
                     Text("Date")
                 })
@@ -41,19 +41,19 @@ struct StrengthWorkoutEntryView: View {
                             Text(strengthWorkoutNames[name])
                         }
                     })
-                    .foregroundColor(textColor)
+                    .foregroundColor(settings.textColor)
                     Stepper("Sets: \(sets)", value: $sets, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(textColor)
+                        .foregroundColor(settings.textColor)
                     Stepper("Reps: \(reps)", value: $reps, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(textColor)
+                        .foregroundColor(settings.textColor)
                     Stepper("Weight: \(String(format: "%.1f", weight)) \(settings.weightUnit.rawValue)", value: $weight, in: 0...Double(Int.max), step: 2.5)
                     .padding(.top)
                     .padding(.bottom)
-                    .foregroundColor(textColor)
+                    .foregroundColor(settings.textColor)
                 }, header: {
                     Text("Entry")
                 })
@@ -86,7 +86,6 @@ struct StrengthWorkoutEntryView: View {
 
 // MARK: Configs
 
-private let textColor: Color = .black
 private let weightIncrement: Double = 2.5
 
 // MARK: Preview

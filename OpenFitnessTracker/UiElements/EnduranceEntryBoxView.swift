@@ -21,23 +21,23 @@ struct EnduranceEntryBoxView: View {
                     .font(.system(size: 16))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .border(settings.textColor)
                 Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
                     .font(.system(size: 16))
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .border(Color.black)
+                    .border(settings.textColor)
             }
             Text("Time: \(entry.getFormattedDurationString())")
                 .font(.system(size: 24))
                 .padding()
                 .frame(maxWidth: .infinity)
-                .border(Color.black)
+                .border(settings.textColor)
             Text("Distance \(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.distanceUnit))) \(settings.distanceUnit.rawValue)")
                 .font(.system(size: 24))
                 .padding()
                 .frame(maxWidth: .infinity)
-                .border(Color.black)
+                .border(settings.textColor)
         }
     }
 }
