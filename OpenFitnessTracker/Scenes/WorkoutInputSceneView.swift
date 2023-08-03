@@ -63,7 +63,10 @@ struct WorkoutInputSceneView: View {
                         }
                     }
                 }
-            }.padding(16)
+            }
+            .padding(16)
+            .environmentObject(viewModel)
+
             Button("+") {
                 isShowingEntryForm = true
             }.popover(isPresented: $isShowingEntryForm) {
