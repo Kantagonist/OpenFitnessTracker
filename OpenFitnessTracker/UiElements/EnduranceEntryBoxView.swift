@@ -17,28 +17,36 @@ struct EnduranceEntryBoxView: View {
     var body: some View {
         VStack(spacing: 0) {
             WorkoutEntryHeaderView(entry: entry, settings: settings)
-            Text("Time: \(entry.getFormattedDurationString())")
-                .font(.system(size: 20))
-                .padding(16.0)
-                .frame(maxWidth: .infinity)
-                .overlay(
-                    SelectedBorderShape(
-                        sides: [.leading, .trailing, .bottom],
-                        cornerRadius: 20.0
-                    )
-                    .stroke(settings.textColor, lineWidth: 1.0)
-                )
-            Text("Distance \(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.distanceUnit))) \(settings.distanceUnit.rawValue)")
-                .font(.system(size: 20))
-                .padding(16.0)
-                .frame(maxWidth: .infinity)
-                .overlay(
-                    SelectedBorderShape(
-                        sides: [.leading, .trailing, .bottom],
-                        cornerRadius: 20.0
-                    )
-                    .stroke(settings.textColor, lineWidth: 1.0)
-                )
+            HStack {
+                Spacer()
+                    .frame(width: 10)
+                VStack (spacing: 0) {
+                    Text("Time: \(entry.getFormattedDurationString())")
+                        .font(.system(size: 20))
+                        .padding(16.0)
+                        .frame(maxWidth: .infinity)
+                        .overlay(
+                            SelectedBorderShape(
+                                sides: [.leading, .trailing, .bottom],
+                                cornerRadius: 20.0
+                            )
+                            .stroke(settings.textColor, lineWidth: 1.0)
+                        )
+                    Text("Distance \(String(format: "%.2f", entry.getConvertedDistanceUnit(for: settings.distanceUnit))) \(settings.distanceUnit.rawValue)")
+                        .font(.system(size: 20))
+                        .padding(16.0)
+                        .frame(maxWidth: .infinity)
+                        .overlay(
+                            SelectedBorderShape(
+                                sides: [.leading, .trailing, .bottom],
+                                cornerRadius: 20.0
+                            )
+                            .stroke(settings.textColor, lineWidth: 1.0)
+                        )
+                }
+                Spacer()
+                    .frame(width: 30)
+            }
         }
     }
 }
@@ -55,9 +63,15 @@ private let demoEntry = EnduranceWorkoutEntry(
 
 struct EnduranceEntryBoxView_Previews: PreviewProvider {
     static var previews: some View {
-        EnduranceEntryBoxView(
-            entry: demoEntry,
-            settings: Settings()
-        )
+        HStack {
+            Spacer()
+                .frame(width: 20)
+            EnduranceEntryBoxView(
+                entry: demoEntry,
+                settings: Settings()
+            )
+            Spacer()
+                .frame(width: 20)
+        }
     }
 }
