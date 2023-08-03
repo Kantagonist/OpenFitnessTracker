@@ -16,20 +16,46 @@ struct WorkoutEntryHeaderView: View {
     // MARK: View
 
     var body: some View {
-        HStack {
-            Text(entry.name)
-                .font(.system(size: 24))
-                .foregroundColor(settings.headerTextColor)
-                .padding()
-            Spacer()
-            Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
-                .font(.system(size: 24))
-                .foregroundColor(settings.headerTextColor)
-                .padding()
+        ZStack {
+            VStack {
+                Spacer()
+                    .frame(width: 20)
+                HStack {
+                    HStack {
+                        Text(entry.name)
+                            .font(.system(size: 24))
+                            .foregroundColor(settings.headerTextColor)
+                            .padding()
+                        Spacer()
+                        Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
+                            .font(.system(size: 24))
+                            .foregroundColor(settings.headerTextColor)
+                            .padding()
+                    }
+                    .padding(10.0)
+                    .background(settings.headerBackgroundColor)
+                    .shadow(color: settings.headerBackgroundColor, radius: 10, x: 0, y: 0)
+                    Spacer()
+                        .frame(width: 20)
+                }
+            }
+            .frame(maxHeight: 100)
+            VStack {
+                HStack {
+                    Spacer()
+                        .frame(width: .infinity)
+                    Button("X", action: {
+                        
+                    })
+                    .frame(width: 40, height: 40)
+                    .background(Color.gray)
+                    .foregroundColor(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0, style: .continuous))
+                }
+                Spacer()
+            }
+            .frame(maxHeight: 100)
         }
-        .padding(10.0)
-        .background(settings.headerBackgroundColor)
-        .shadow(color: settings.headerBackgroundColor, radius: 10, x: 0, y: 0)
     }
 }
 
@@ -42,9 +68,14 @@ fileprivate let demoEntry = WorkoutEntry(
 
 struct WorkoutEntryHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        WorkoutEntryHeaderView(
-            entry: demoEntry,
-            settings: Settings()
-        )
+        HStack {
+            Spacer().frame(width: 20)
+            WorkoutEntryHeaderView(
+                entry: demoEntry,
+                settings: Settings()
+            )
+            Spacer()
+                .frame(width: 20)
+        }
     }
 }
