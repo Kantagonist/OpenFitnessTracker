@@ -22,7 +22,7 @@ In the future, i hope to implement changes and improvements to the system.
 The following is a small list of features, i hope to incorporate.
 
 Short-term goals:
-- [ ] Integrating a delete button, which lets you delete workouts at runtime
+- [x] Integrating a delete button, which lets you delete workouts at runtime
 - [x] A more beautiful UI for the Workout entry displays
 - [ ] Unified settings & more expansive Settings
 - [ ] Adjustable personal information
