@@ -22,9 +22,9 @@ struct TabCollection: View {
                 .tabItem {
                     Label("Workouts", systemImage: "1.circle")
                 }
-            PersonalInformationSceneView(person: previewExamplePerson)
+            StatisticsSceneView()
                 .tabItem {
-                    Label("Personal Info", systemImage: "2.circle")
+                    Label("Statistics", systemImage: "2.circle")
                 }
             SettingsView()
                 .tabItem {
