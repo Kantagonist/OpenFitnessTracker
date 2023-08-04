@@ -27,6 +27,12 @@ struct WorkoutListPicker: View {
                 Button("Add") {
                     showTextInputDialog = true
                 }
+                .alert("Add New Entry", isPresented: $showTextInputDialog) {
+                    TextField("", text: $newEntry)
+                    Button("Confirm", role: .cancel) {
+                        entries.append(newEntry)
+                    }
+                }
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .font(.title)
                 .padding(20)
@@ -39,16 +45,8 @@ struct WorkoutListPicker: View {
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .font(.title)
-                .frame(width: .infinity)
                 .padding(20)
                 .foregroundColor(Color.red)
-            }
-            .alert("Add New Entry", isPresented: $showTextInputDialog) {
-                TextField("", text: $newEntry)
-                Button("Confirm", role: .cancel) {
-                    entries.append(newEntry)
-                    newEntry = ""
-                }
             }
         }
     }

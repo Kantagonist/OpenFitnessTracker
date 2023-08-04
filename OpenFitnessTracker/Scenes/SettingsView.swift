@@ -11,6 +11,7 @@ import SwiftUI
 struct SettingsView: View {
 
     @StateObject private var viewModel = ViewModel.getInstance()
+    @State private var presentPopOver = false
 
     // MARK: Main View
 
@@ -38,10 +39,16 @@ struct SettingsView: View {
                 }.foregroundColor(viewModel.settings.textColor)
 
                 Section(header: Text("Workouts")) {
-                    // TODO: find out why pressing delete spawns the dialog again
-                    WorkoutListPicker(entries: $viewModel.settings.strWorkouts)
-                    WorkoutListPicker(entries: $viewModel.settings.endWorkouts)
+                    Button("Change Workouts") {
+                        presentPopOver = true
+                    }.popover(isPresented: $presentPopOver, content: {
+                        VStack(spacing: 5) {
+                            WorkoutListPicker(entries: $viewModel.settings.endWorkouts)
+                            WorkoutListPicker(entries: $viewModel.settings.strWorkouts)
+                        }
+                    })
                 }
+                
             }
             .navigationBarTitle("Settings")
         }
