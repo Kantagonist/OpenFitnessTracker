@@ -19,7 +19,7 @@ struct SettingsView: View {
             List {
 
                 Section(header: Text("Profile")) {
-                    Label("\(viewModel.settings.person.name)", image: "person_icon")
+                    Label("\(viewModel.settings.person.name)", image: viewModel.settings.person.fotoName)
                     DatePicker("Birthdate", selection: $viewModel.settings.person.birthdate, displayedComponents: .date)
                 }.foregroundColor(viewModel.settings.textColor)
 

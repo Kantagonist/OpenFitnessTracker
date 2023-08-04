@@ -19,7 +19,7 @@ struct EnduranceWorkoutEntryView: View {
     let settings: Settings
     
     @State private var date = Date()
-    @State private var name = strengthWorkoutNames[0]
+    @State private var name = ""
     private var durationInMilliseconds: UInt64 {
         get {
             return UInt64(hours * minutes * seconds * 1_000)
@@ -41,8 +41,8 @@ struct EnduranceWorkoutEntryView: View {
                 })
                 Section(content: {
                     Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< enduranceWorkoutNames.count, id: \.self) { name in
-                            Text(enduranceWorkoutNames[name])
+                        ForEach(0 ..< settings.endWorkouts.count, id: \.self) { name in
+                            Text(settings.endWorkouts[name])
                         }
                     })
                     .foregroundColor(settings.textColor)

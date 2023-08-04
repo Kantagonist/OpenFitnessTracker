@@ -11,7 +11,7 @@ import SwiftUI
 /// Struct which holds the current settings.
 struct Settings {
     var person = Person(
-        foto: UIImage(imageLiteralResourceName: "person_icon"),
+        fotoName: "person_icon",
         name: "Placeholder Name",
         birthdate: .now
     )
@@ -26,12 +26,12 @@ struct Settings {
 
 /// Data representation of app user
 struct Person {
-    var foto: UIImage
+    var fotoName: String
     var name: String
     var birthdate: Date
 }
 
-var strengthWorkoutNames = [
+private var strengthWorkoutNames = [
     "Bench Press",
     "Deadlift",
     "Bicep Curl",
@@ -40,7 +40,7 @@ var strengthWorkoutNames = [
     "Pull-up"
 ]
 
-var enduranceWorkoutNames = [
+private var enduranceWorkoutNames = [
     "Jogging",
     "Cycling",
     "Swimming"

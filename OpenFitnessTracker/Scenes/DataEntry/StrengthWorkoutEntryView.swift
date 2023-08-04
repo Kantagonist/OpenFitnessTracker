@@ -21,7 +21,7 @@ struct StrengthWorkoutEntryView: View {
 
     // Form Entry state variables
     @State private var date = Date()
-    @State private var name = strengthWorkoutNames[0]
+    @State private var name = ""
     @State private var reps = 0
     @State private var sets = 0
     @State private var weight: Double = 0.0
@@ -37,8 +37,8 @@ struct StrengthWorkoutEntryView: View {
                 })
                 Section(content: {
                     Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< strengthWorkoutNames.count, id: \.self) { name in
-                            Text(strengthWorkoutNames[name])
+                        ForEach(0 ..< settings.strWorkouts.count, id: \.self) { name in
+                            Text(settings.strWorkouts[name])
                         }
                     })
                     .foregroundColor(settings.textColor)
