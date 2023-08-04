@@ -49,7 +49,7 @@ class ViewModel: ObservableObject {
 
     @Published var strengthWorkoutEntries = [StrengthWorkoutEntry]()
     @Published var enduranceWorkoutEntries =  [EnduranceWorkoutEntry]()
-    var settings = Settings()
+    @Published var settings = Settings()
 
     // MARK: Data Query Handling
 

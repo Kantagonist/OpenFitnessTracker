@@ -10,13 +10,25 @@ import SwiftUI
 
 /// Struct which holds the current settings.
 struct Settings {
+    var person = Person(
+        foto: UIImage(imageLiteralResourceName: "person_icon"),
+        name: "Placeholder Name",
+        birthdate: .now
+    )
     var weightUnit: WeightUnit = .kg
     var distanceUnit: DistanceUnit = .km
-    let strWorkouts = strengthWorkoutNames
-    let endWorkouts = enduranceWorkoutNames
-    let textColor = Color("TextColor")
+    var strWorkouts = strengthWorkoutNames
+    var endWorkouts = enduranceWorkoutNames
+    var textColor = Color("TextColor")
     let headerTextColor = Color("HeaderText")
     let headerBackgroundColor = Color("HeaderBackground")
+}
+
+/// Data representation of app user
+struct Person {
+    var foto: UIImage
+    var name: String
+    var birthdate: Date
 }
 
 var strengthWorkoutNames = [

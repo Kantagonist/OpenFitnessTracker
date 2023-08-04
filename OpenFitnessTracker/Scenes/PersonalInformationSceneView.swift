@@ -19,8 +19,7 @@ struct PersonalInformationSceneView: View {
                 Image(uiImage: person.foto)
                     .padding()
                 HStack {
-                    Text(person.firstName)
-                    Text(person.lastName)
+                    Text(person.name)
                 }
                 .padding()
                 HStack {
@@ -55,27 +54,17 @@ struct DataInputAlert: View {
  
 // MARK: Data Representation
 
-/// Data representation of app user
-struct Person {
-    let foto: UIImage
-    let firstName: String
-    let lastName: String
-    let birthdate: Date
-}
-
 // MARK: Preview
 
 /// Example user
 let previewExamplePerson = Person(
     foto: UIImage(imageLiteralResourceName: "person_icon"),
-    firstName: "Max",
-    lastName: "Mustermann",
+    name: "Max Mustermann",
     birthdate: Date.now
 )
 
 struct PersonalInformationSceneView_Previews: PreviewProvider {
     static var previews: some View {
-        
         PersonalInformationSceneView(person: previewExamplePerson)
     }
 }
