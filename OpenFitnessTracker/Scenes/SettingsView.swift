@@ -38,6 +38,7 @@ struct SettingsView: View {
                 }.foregroundColor(viewModel.settings.textColor)
 
                 Section(header: Text("Workouts")) {
+                    // TODO: find out why pressing delete spawns the dialog again
                     WorkoutListPicker(entries: $viewModel.settings.strWorkouts)
                     WorkoutListPicker(entries: $viewModel.settings.endWorkouts)
                 }

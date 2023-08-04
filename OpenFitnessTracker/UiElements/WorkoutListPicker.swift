@@ -11,34 +11,30 @@ import SwiftUI
 struct WorkoutListPicker: View {
 
     @Binding var entries: [String]
-
-    @State private var chosenEntry = ""
+    @State private var chosenEntry = 0
+    @State private var showTextInputDialog = false
+    @State private var newEntry = ""
 
     var body: some View {
         VStack(spacing: 0) {
             Picker("", selection: $chosenEntry) {
-                ForEach(entries, id: \.self) { workoutEntry in
-                    Text(workoutEntry)
+                ForEach(0..<entries.count, id: \.self) { index in
+                    Text(entries[index])
                 }
             }.pickerStyle(WheelPickerStyle())
+
             HStack(alignment: .center, spacing: 0) {
                 Button("Add") {
-                    
+                    showTextInputDialog = true
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
                 .font(.title)
                 .padding(20)
                 .foregroundColor(Color.green)
+
                 Button("Delete") {
-                    var i = 0
-                    var iterator = entries.makeIterator()
-                    while let current = iterator.next() {
-                        print("chosenEntry: \(chosenEntry)")
-                        if current == chosenEntry {
-                            entries.remove(at: i)
-                            break
-                        }
-                        i += 0
+                    if entries.count > chosenEntry {
+                        entries.remove(at: chosenEntry)
                     }
                 }
                 .frame(minWidth: 0, maxWidth: .infinity)
@@ -46,6 +42,13 @@ struct WorkoutListPicker: View {
                 .frame(width: .infinity)
                 .padding(20)
                 .foregroundColor(Color.red)
+            }
+            .alert("Add New Entry", isPresented: $showTextInputDialog) {
+                TextField("", text: $newEntry)
+                Button("Confirm", role: .cancel) {
+                    entries.append(newEntry)
+                    newEntry = ""
+                }
             }
         }
     }
