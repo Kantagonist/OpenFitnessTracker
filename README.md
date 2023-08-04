@@ -5,6 +5,11 @@ I use this project to teach myself SwiftUI.
 
 ## Change Log
 
+0.0.2:
+- fixed Settings and expanded
+- User can add and delete workouts
+- UI Improvement for data entries
+
 0.0.1:
 - Basic functionality for inputting workouts at runtime
 - Popover screens for workout input
@@ -24,7 +29,7 @@ The following is a small list of features, i hope to incorporate.
 Short-term goals:
 - [x] Integrating a delete button, which lets you delete workouts at runtime
 - [x] A more beautiful UI for the Workout entry displays
-- [ ] Unified settings & more expansive Settings
+- [x] Unified settings & more expansive Settings
 - [ ] Adjustable personal information
 
 Long-term goals:
