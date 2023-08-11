@@ -96,4 +96,16 @@ class ViewModel: ObservableObject {
         }
         return result
     }
+
+    /// Sorts all entries by date and returns in ascending order.
+    /// - Returns: A list of workouts in ascending order
+    func allWorkoutsSortedByDate() -> [WorkoutEntry] {
+        var result = [WorkoutEntry]()
+        result.append(contentsOf: strengthWorkoutEntries)
+        result.append(contentsOf: enduranceWorkoutEntries)
+        
+        return result.sorted(by: {
+            $0.timestamp.compare($1.timestamp) == .orderedAscending
+        })
+    }
 }

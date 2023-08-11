@@ -42,8 +42,9 @@ struct StatisticsSceneView: View {
                     }
                 }
 
-                
-                
+                Section(header: Text("Frequency")) {
+                    FrequencyStatisticView(workouts: viewModel.allWorkoutsSortedByDate())
+                }
             }
             .foregroundColor(viewModel.settings.textColor)
             .navigationBarTitle("Statistics")

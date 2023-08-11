@@ -21,6 +21,7 @@
 		4C81AAF02A051BEB0095D519 /* OpenFitnessTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AAEF2A051BEB0095D519 /* OpenFitnessTrackerTests.swift */; };
 		4C81AAFA2A051BEB0095D519 /* OpenFitnessTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AAF92A051BEB0095D519 /* OpenFitnessTrackerUITests.swift */; };
 		4C81AAFC2A051BEB0095D519 /* OpenFitnessTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AAFB2A051BEB0095D519 /* OpenFitnessTrackerUITestsLaunchTests.swift */; };
+		4CAEF2002A866B1700D3A275 /* FrequencyStatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAEF1FF2A866B1700D3A275 /* FrequencyStatisticView.swift */; };
 		4CB2D0CC2A7440EF00778593 /* SettingsDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D0CB2A7440EF00778593 /* SettingsDataStructs.swift */; };
 		4CB2D0CD2A74419D00778593 /* StrengthEntryBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7AB922A72898B0073FE31 /* StrengthEntryBoxView.swift */; };
 		4CDD84C82A29FB9100F229CF /* StrengthWorkoutEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD84C72A29FB9100F229CF /* StrengthWorkoutEntryView.swift */; };
@@ -68,6 +69,7 @@
 		4C81AAF92A051BEB0095D519 /* OpenFitnessTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFitnessTrackerUITests.swift; sourceTree = "<group>"; };
 		4C81AAFB2A051BEB0095D519 /* OpenFitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4CA7AB922A72898B0073FE31 /* StrengthEntryBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthEntryBoxView.swift; sourceTree = "<group>"; };
+		4CAEF1FF2A866B1700D3A275 /* FrequencyStatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyStatisticView.swift; sourceTree = "<group>"; };
 		4CB2D0CB2A7440EF00778593 /* SettingsDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataStructs.swift; sourceTree = "<group>"; };
 		4CDD84C72A29FB9100F229CF /* StrengthWorkoutEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthWorkoutEntryView.swift; sourceTree = "<group>"; };
 		4CE241222A1DFD3F006080B3 /* WorkoutInputSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInputSceneView.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 		4CAEF1FE2A865CB000D3A275 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				4CAEF1FF2A866B1700D3A275 /* FrequencyStatisticView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				4CDD84C82A29FB9100F229CF /* StrengthWorkoutEntryView.swift in Sources */,
 				4C2ED0BC2A7444CD00A4B683 /* EnduranceEntryBoxView.swift in Sources */,
 				4C35AF9D2A1CFBC500DA3204 /* StatisticsSceneView.swift in Sources */,
+				4CAEF2002A866B1700D3A275 /* FrequencyStatisticView.swift in Sources */,
 				4CB2D0CD2A74419D00778593 /* StrengthEntryBoxView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
