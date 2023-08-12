@@ -8,7 +8,7 @@
 import SwiftUI
 import Charts
 
-/// Shows a bar graph which displays how many workouts were had per day.
+/// Shows a bar graph which displays how many workouts were had per week.
 struct FrequencyStatisticView: View {
 
     ///  a set of workouts, sorted by date
@@ -16,24 +16,51 @@ struct FrequencyStatisticView: View {
 
     var body: some View {
         Chart {
-            let amountsPerDate = getAmountOfEachDate()
+            let currentYear = Calendar.current.dateComponents([.year], from: Date()).year!
+            let amountsPerDate = getTrainingsPerWeek(of: currentYear)
             ForEach(workouts) { workout in
+                let weekNumber = Calendar.current.dateComponents([.weekOfYear], from: workout.timestamp).weekOfYear!
                 LineMark(
-                    x: .value("Date", workout.timestamp),
-                    y: .value("Amount", amountsPerDate[workout.timestamp]!)
+                    x: .value("Week", weekNumber),
+                    y: .value("Amount", amountsPerDate[weekNumber]!)
                 )
             }
         }
+        .chartYScale(domain: [0, 8])
+        .chartYAxis {
+            AxisMarks(values: [0, 2, 4, 6, 8])
+        }
+        .chartXScale(domain: [0, 52])
+        // TODO: automatic just doesn't work for some reason. Find a better solution.
+        .chartXAxis {
+            AxisMarks(values: .automatic(desiredCount: 20))
+        }
     }
     
-    /// Returns the amount of times, each given date occurs.
-    private func getAmountOfEachDate() -> [Date: Int] {
-        var result = [Date: Int]()
+    /// Calculates the training per calendar week.
+    /// Gives back a comprehensive dict for display in bar graph.
+    /// - Parameters:
+    ///  - year The year from which to show as an Int
+    /// - Returns: A dict with week, amount kv-pairs
+    private func getTrainingsPerWeek(of year: Int) -> [Int: Int] {
+        var result = [Int: Int]()
+        for i in 1...52 {
+            result[i] = 0
+        }
+
         for entry in workouts {
-            if result.keys.contains(entry.timestamp) {
-                result[entry.timestamp]! += 1
-            } else {
-                result[entry.timestamp] = 1
+            // converts date into simple yyyy-mm-dd format
+            let convertedDate = Calendar.current.dateComponents(
+                [.year, .weekOfYear],
+                from: entry.timestamp
+            )
+            // adjust entries
+            if convertedDate.year == year {
+                if result.keys.contains(convertedDate.weekOfYear!) {
+                    result[convertedDate.weekOfYear!]! += 1
+                } else {
+                    result[convertedDate.weekOfYear!] = 1
+                }
             }
         }
         return result
@@ -57,37 +84,16 @@ struct FrequencyStatisticView_Previews: PreviewProvider {
                     timestamp: Calendar.current.date(byAdding: .day, value: -i, to: date)!
                 )
             )
-            if i % 2 == 0 {
-                workouts.append(
-                    WorkoutEntry(
-                        name: "\(i).w",
-                        timestamp: Calendar.current.date(byAdding: .day, value: -i, to: date)!
-                    )
-                )
-            }
-            if i % 3 == 0 {
-                workouts.append(
-                    WorkoutEntry(
-                        name: "\(i).w",
-                        timestamp: Calendar.current.date(byAdding: .day, value: -i, to: date)!
-                    )
-                )
-            }
         }
         return workouts.sorted(by: {
             $0.timestamp.compare($1.timestamp) == .orderedAscending
         })
     }
 
-    
+    // TODO: find fix for why crashes with dates before current year.
     static var previews: some View {
-        HStack {
-            Spacer()
-                .frame(width: 20)
-            FrequencyStatisticView(workouts: getWorkouts(amount: 10))
-                .frame(height: 200)
-            Spacer()
-                .frame(width: 20)
-        }
+        FrequencyStatisticView(workouts: getWorkouts(amount: 200))
+            .frame(height: 200)
+            .padding(20)
     }
 }
