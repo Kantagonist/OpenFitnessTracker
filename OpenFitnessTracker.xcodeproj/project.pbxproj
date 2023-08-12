@@ -22,6 +22,8 @@
 		4C81AAFA2A051BEB0095D519 /* OpenFitnessTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AAF92A051BEB0095D519 /* OpenFitnessTrackerUITests.swift */; };
 		4C81AAFC2A051BEB0095D519 /* OpenFitnessTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C81AAFB2A051BEB0095D519 /* OpenFitnessTrackerUITestsLaunchTests.swift */; };
 		4CAEF2002A866B1700D3A275 /* FrequencyStatisticView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAEF1FF2A866B1700D3A275 /* FrequencyStatisticView.swift */; };
+		4CAEF2022A87FBD000D3A275 /* DetailStrengthStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAEF2012A87FBD000D3A275 /* DetailStrengthStatisticsView.swift */; };
+		4CAEF2042A87FBE200D3A275 /* DetailEnduranceStatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CAEF2032A87FBE200D3A275 /* DetailEnduranceStatisticsView.swift */; };
 		4CB2D0CC2A7440EF00778593 /* SettingsDataStructs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB2D0CB2A7440EF00778593 /* SettingsDataStructs.swift */; };
 		4CB2D0CD2A74419D00778593 /* StrengthEntryBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CA7AB922A72898B0073FE31 /* StrengthEntryBoxView.swift */; };
 		4CDD84C82A29FB9100F229CF /* StrengthWorkoutEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CDD84C72A29FB9100F229CF /* StrengthWorkoutEntryView.swift */; };
@@ -70,6 +72,8 @@
 		4C81AAFB2A051BEB0095D519 /* OpenFitnessTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenFitnessTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		4CA7AB922A72898B0073FE31 /* StrengthEntryBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthEntryBoxView.swift; sourceTree = "<group>"; };
 		4CAEF1FF2A866B1700D3A275 /* FrequencyStatisticView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyStatisticView.swift; sourceTree = "<group>"; };
+		4CAEF2012A87FBD000D3A275 /* DetailStrengthStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailStrengthStatisticsView.swift; sourceTree = "<group>"; };
+		4CAEF2032A87FBE200D3A275 /* DetailEnduranceStatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEnduranceStatisticsView.swift; sourceTree = "<group>"; };
 		4CB2D0CB2A7440EF00778593 /* SettingsDataStructs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataStructs.swift; sourceTree = "<group>"; };
 		4CDD84C72A29FB9100F229CF /* StrengthWorkoutEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrengthWorkoutEntryView.swift; sourceTree = "<group>"; };
 		4CE241222A1DFD3F006080B3 /* WorkoutInputSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutInputSceneView.swift; sourceTree = "<group>"; };
@@ -188,6 +192,8 @@
 			isa = PBXGroup;
 			children = (
 				4CAEF1FF2A866B1700D3A275 /* FrequencyStatisticView.swift */,
+				4CAEF2012A87FBD000D3A275 /* DetailStrengthStatisticsView.swift */,
+				4CAEF2032A87FBE200D3A275 /* DetailEnduranceStatisticsView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -360,11 +366,13 @@
 				4CE241252A1DFD72006080B3 /* ViewModel.swift in Sources */,
 				4C81AAE12A051BEA0095D519 /* ContentView.swift in Sources */,
 				4C81AADF2A051BEA0095D519 /* OpenFitnessTrackerApp.swift in Sources */,
+				4CAEF2042A87FBE200D3A275 /* DetailEnduranceStatisticsView.swift in Sources */,
 				4C2ED0BE2A74512E00A4B683 /* ChooseDataEntryView.swift in Sources */,
 				4C57DA702A7D20CE00858186 /* WorkoutListPicker.swift in Sources */,
 				4CE9D3EC2A740E7900942190 /* EnduranceWorkoutEntryView.swift in Sources */,
 				4C7F67D42A76B27300199171 /* WorkoutEntryHeaderView.swift in Sources */,
 				4CE241232A1DFD3F006080B3 /* WorkoutInputSceneView.swift in Sources */,
+				4CAEF2022A87FBD000D3A275 /* DetailStrengthStatisticsView.swift in Sources */,
 				4C7F67DA2A76C03C00199171 /* SelectedBorderShape.swift in Sources */,
 				4CDD84C82A29FB9100F229CF /* StrengthWorkoutEntryView.swift in Sources */,
 				4C2ED0BC2A7444CD00A4B683 /* EnduranceEntryBoxView.swift in Sources */,

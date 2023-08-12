@@ -11,9 +11,7 @@ import SwiftUI
 struct StatisticsSceneView: View {
 
     @StateObject private var viewModel = ViewModel.getInstance()
-    
-    @State private var maxStrengthWorkout = ""
-    @State private var maxEnduranceWorkout = ""
+    @State private var presentPopover = false
 
     // MARK: Main View
 
@@ -44,6 +42,25 @@ struct StatisticsSceneView: View {
 
                 Section(header: Text("Frequency")) {
                     FrequencyStatisticView(workouts: viewModel.allWorkoutsSortedByDate())
+                }
+                
+                Section(header: Text("Details")) {
+                    ForEach(viewModel.settings.endWorkouts, id: \.self) { workout in
+                        Button(workout) {
+                            presentPopover = true
+                        }.popover(isPresented: $presentPopover) {
+                            // TODO: create new statistics view
+                        }
+                    }
+                    .foregroundColor(.blue)
+                    ForEach(viewModel.settings.strWorkouts, id: \.self) { workout in
+                        Button(workout) {
+                            presentPopover = true
+                        }.popover(isPresented: $presentPopover) {
+                            // TODO: create new statistics view
+                        }
+                    }
+                    .foregroundColor(.blue)
                 }
             }
             .foregroundColor(viewModel.settings.textColor)
