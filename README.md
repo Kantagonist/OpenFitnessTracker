@@ -5,6 +5,10 @@ I use this project to teach myself SwiftUI.
 
 ## Change Log
 
+0.0.3:
+- support for swiftlint
+- Personal info page is now a statistics overview
+
 0.0.2:
 - fixed Settings and expanded
 - User can add and delete workouts
