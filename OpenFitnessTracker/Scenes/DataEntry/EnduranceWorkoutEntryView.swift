@@ -17,13 +17,14 @@ struct EnduranceWorkoutEntryView: View {
     @Binding var existingEntries: [EnduranceWorkoutEntry]
     @Binding var isPresented: Bool
     let settings: Settings
-    
+
     @State private var date = Date()
     @State private var name = ""
     private var durationInMilliseconds: UInt64 {
         get {
             return UInt64(hours * minutes * seconds * 1_000)
         }
+        set { _ = newValue }
     }
     @State private var distance: Double = 0.0
     @State private var seconds: Int = 0
@@ -60,7 +61,7 @@ struct EnduranceWorkoutEntryView: View {
                                 }
                             }
                             .pickerStyle(WheelPickerStyle())
-                            
+
                             Text("M:").fontWeight(.bold)
                             Picker("Minutes", selection: $minutes) {
                                 ForEach(0 ..< 61, id: \.self) { minute in
@@ -68,7 +69,7 @@ struct EnduranceWorkoutEntryView: View {
                                 }
                             }
                             .pickerStyle(WheelPickerStyle())
-                            
+
                             Text("S:").fontWeight(.bold)
                             Picker("Minutes", selection: $seconds) {
                                 ForEach(0 ..< 61, id: \.self) { second in
@@ -106,7 +107,6 @@ struct EnduranceWorkoutEntryView: View {
         }
     }
 }
-
 
 // MARK: Configs
 

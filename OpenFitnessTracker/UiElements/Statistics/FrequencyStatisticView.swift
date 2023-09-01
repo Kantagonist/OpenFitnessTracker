@@ -36,7 +36,7 @@ struct FrequencyStatisticView: View {
             AxisMarks(values: .automatic(desiredCount: 20))
         }
     }
-    
+
     /// Calculates the training per calendar week.
     /// Gives back a comprehensive dict for display in bar graph.
     /// - Parameters:
@@ -70,7 +70,7 @@ struct FrequencyStatisticView: View {
 // MARK: Preview
 
 struct FrequencyStatisticView_Previews: PreviewProvider {
-    
+
     static func getWorkouts(amount: Int) -> [WorkoutEntry] {
         var workouts = [WorkoutEntry]()
         let date = Date.now

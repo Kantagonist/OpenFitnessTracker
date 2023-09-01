@@ -58,7 +58,7 @@ struct DetailEnduranceStatisticsView: View {
 // MARK: Preview
 
 struct DetailEnduranceStatisticsView_Previews: PreviewProvider {
-    
+
     private static let name = "Demo Entry"
     private static let distanceUnit = DistanceUnit.km
     private static let workouts = {
@@ -74,7 +74,7 @@ struct DetailEnduranceStatisticsView_Previews: PreviewProvider {
         }
         return result
     }()
-    
+
     static var previews: some View {
         DetailEnduranceStatisticsView(
             name: name,

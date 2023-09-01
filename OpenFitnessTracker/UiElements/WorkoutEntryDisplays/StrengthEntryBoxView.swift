@@ -10,7 +10,7 @@ import SwiftUI
 /// A small box which is read-only.
 /// It displays information from a given ``StrengthWorkoutEntry``.
 struct StrengthEntryBoxView: View {
-    
+
     let entry: StrengthWorkoutEntry
     let settings: Settings
 
@@ -20,7 +20,7 @@ struct StrengthEntryBoxView: View {
             HStack {
                 Spacer()
                     .frame(width: 10)
-                VStack (spacing: 0) {
+                VStack(spacing: 0) {
                     HStack(spacing: 0) {
                         Text("Sets: \(entry.sets)")
                             .foregroundColor(settings.textColor)

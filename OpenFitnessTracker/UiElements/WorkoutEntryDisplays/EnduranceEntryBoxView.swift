@@ -20,7 +20,7 @@ struct EnduranceEntryBoxView: View {
             HStack {
                 Spacer()
                     .frame(width: 10)
-                VStack (spacing: 0) {
+                VStack(spacing: 0) {
                     Text("Time: \(entry.getFormattedDurationString())")
                         .font(.system(size: 20))
                         .padding(16.0)

@@ -10,7 +10,7 @@ import Charts
 
 /// Shows detailed workout data of all given endurance entries.
 struct DetailStrengthStatisticsView: View {
-    
+
     let name: String
     let weightUnit: WeightUnit
     let workouts: [StrengthWorkoutEntry]
@@ -49,7 +49,7 @@ struct DetailStrengthStatisticsView: View {
                     .chartYAxisLabel(position: .trailing, alignment: .center) {
                         Text("Sets")
                     }
-                   
+
                 }
             }
             .padding()
@@ -61,7 +61,7 @@ struct DetailStrengthStatisticsView: View {
 // MARK: Preview
 
 struct DetailStrengthStatisticsView_Previews: PreviewProvider {
-    
+
     private static let name = "Demo Entry"
     private static let weightUnit = WeightUnit.kg
     private static let workouts = {
@@ -78,7 +78,7 @@ struct DetailStrengthStatisticsView_Previews: PreviewProvider {
         }
         return result
     }()
-    
+
     static var previews: some View {
         DetailStrengthStatisticsView(
             name: name,

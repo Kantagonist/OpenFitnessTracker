@@ -62,7 +62,7 @@ class EnduranceWorkoutEntry: WorkoutEntry {
         self.recordedDistanceUnit = recordedDistanceUnit
         super.init(name: name, timestamp: timestamp)
     }
-    
+
     /// Gets the structs distance converted to the given distance unit.
     /// - Parameters:
     ///   - distanceUnit: The unit to convert the value into
@@ -101,12 +101,12 @@ class EnduranceWorkoutEntry: WorkoutEntry {
             seconds = "\(remainingMS / secondInMilliseconds):"
             remainingMS = remainingMS % secondInMilliseconds
         }
-        
+
         return hours + minutes + seconds + String(format: "%04d", remainingMS)
     }
 }
 
 enum EntryType: String, CaseIterable {
-    case Strength
-    case Endurance
+    case strength
+    case endurance
 }

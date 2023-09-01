@@ -16,7 +16,7 @@ struct WorkoutInputSceneView: View {
     /// Boolean to control popover workout entry screen trigger
     @State private var isShowingEntryForm = false
     /// Shows which entries to show
-    @State private var entryShown: EntryType = .Strength
+    @State private var entryShown: EntryType = .strength
 
     var body: some View {
         ZStack {
@@ -30,11 +30,11 @@ struct WorkoutInputSceneView: View {
                     }
                     .pickerStyle(.segmented)
                     .padding(EdgeInsets(top: 16.0, leading: 0.0, bottom: 16.0, trailing: 0.0))
-                    
+
                     // Render chosen entries
                     switch entryShown {
-                    case .Strength:
-                        if viewModel.strengthWorkoutEntries.count <= 0 {
+                    case .strength:
+                        if viewModel.strengthWorkoutEntries.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()
@@ -47,8 +47,8 @@ struct WorkoutInputSceneView: View {
                                 )
                             }
                         }
-                    case .Endurance:
-                        if viewModel.enduranceWorkoutEntries.count <= 0 {
+                    case .endurance:
+                        if viewModel.enduranceWorkoutEntries.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()

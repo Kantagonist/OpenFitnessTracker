@@ -16,7 +16,7 @@ struct StatisticsSceneView: View {
     // MARK: Main View
 
     var body: some View {
-        
+
         NavigationView {
             List {
                 Section(header: Text("Max Values")) {
@@ -43,7 +43,7 @@ struct StatisticsSceneView: View {
                 Section(header: Text("Frequency")) {
                     FrequencyStatisticView(workouts: viewModel.allWorkoutsSortedByDate())
                 }
-                
+
                 Section(header: Text("Details")) {
                     ForEach(viewModel.settings.endWorkouts, id: \.self) { workout in
                         Button(workout) {
@@ -52,8 +52,7 @@ struct StatisticsSceneView: View {
                             DetailEnduranceStatisticsView(
                                 name: workout,
                                 distanceUnit: viewModel.settings.distanceUnit,
-                                workouts: viewModel.enduranceWorkoutEntries.filter(
-                                    { $0.name == workout }
+                                workouts: viewModel.enduranceWorkoutEntries.filter({ $0.name == workout }
                                 )
                             )
                         }
@@ -66,8 +65,7 @@ struct StatisticsSceneView: View {
                             DetailStrengthStatisticsView(
                                 name: workout,
                                 weightUnit: viewModel.settings.weightUnit,
-                                workouts: viewModel.strengthWorkoutEntries.filter(
-                                    { $0.name == workout }
+                                workouts: viewModel.strengthWorkoutEntries.filter({ $0.name == workout }
                                 )
                             )
                         }

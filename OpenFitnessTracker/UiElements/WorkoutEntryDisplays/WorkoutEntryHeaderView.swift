@@ -9,7 +9,7 @@ import SwiftUI
 
 /// A parental view element, which allows the user to display a generic  headline for their workout entry.
 struct WorkoutEntryHeaderView: View {
-    
+
     /// Informal access to the viewModel state.
     /// Allows the user to change the state of views which are higher up in the hierarchy.
     @EnvironmentObject var viewModel: ViewModel
@@ -64,7 +64,7 @@ struct WorkoutEntryHeaderView: View {
 
 // MARK: Preview
 
-fileprivate let demoEntry = WorkoutEntry(
+private let demoEntry = WorkoutEntry(
     name: "Deadlift",
     timestamp: .now
 )

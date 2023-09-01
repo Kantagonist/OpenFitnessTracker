@@ -15,8 +15,8 @@ struct ChooseDataEntryView: View {
     @Binding var isPresented: Bool
     let settings: Settings
 
-    @State private var entryShown: EntryType = .Strength
-    
+    @State private var entryShown: EntryType = .strength
+
     // MARK: View
 
     var body: some View {
@@ -29,13 +29,13 @@ struct ChooseDataEntryView: View {
             .pickerStyle(.segmented)
             .padding(EdgeInsets(top: 16.0, leading: 0.0, bottom: 16.0, trailing: 0.0))
             switch entryShown {
-            case .Strength:
+            case .strength:
                 StrengthWorkoutEntryView(
                     existingEntries: $existingStrengthEntries,
                     isPresented: $isPresented,
                     settings: settings
                 )
-            case .Endurance:
+            case .endurance:
                 EnduranceWorkoutEntryView(
                     existingEntries: $existingEnduranceEntries,
                     isPresented: $isPresented,
@@ -49,11 +49,11 @@ struct ChooseDataEntryView: View {
 // MARK: Preview
 
 struct ChooseDataEntryView_Previews: PreviewProvider {
-    
+
     @State private static var demoStrengthEntries = [StrengthWorkoutEntry]()
     @State private static var demoEnduranceEntries = [EnduranceWorkoutEntry]()
     @State private static var present = true
-    
+
     static var previews: some View {
         ChooseDataEntryView(
             existingStrengthEntries: $demoStrengthEntries,

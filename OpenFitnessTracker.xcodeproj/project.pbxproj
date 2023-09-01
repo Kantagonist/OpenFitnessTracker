@@ -56,6 +56,7 @@
 		4C2ED0BD2A74512E00A4B683 /* ChooseDataEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDataEntryView.swift; sourceTree = "<group>"; };
 		4C35AF9C2A1CFBC500DA3204 /* StatisticsSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSceneView.swift; sourceTree = "<group>"; };
 		4C373C792A66B265008AD251 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		4C4485FF2AA2263C00D88A70 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		4C57DA6F2A7D20CE00858186 /* WorkoutListPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutListPicker.swift; sourceTree = "<group>"; };
 		4C767D832AA21044009084CE /* GroupBoxStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupBoxStyles.swift; sourceTree = "<group>"; };
 		4C7F67D22A76B24600199171 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -157,6 +158,7 @@
 		4C81AAD22A051BEA0095D519 = {
 			isa = PBXGroup;
 			children = (
+				4C4485FF2AA2263C00D88A70 /* .swiftlint.yml */,
 				4C7F67D52A76B3C400199171 /* LICENSE */,
 				4C7F67D22A76B24600199171 /* README.md */,
 				4C81AADD2A051BEA0095D519 /* OpenFitnessTracker */,

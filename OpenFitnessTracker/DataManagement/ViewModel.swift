@@ -12,7 +12,7 @@ class ViewModel: ObservableObject {
 
     // MARK: Instance Singleton
 
-    private static var instance: ViewModel? = nil
+    private static var instance: ViewModel?
 
     // Gets singleton instance
     static func getInstance() -> ViewModel {
@@ -21,7 +21,7 @@ class ViewModel: ObservableObject {
         }
         return instance!
     }
-    
+
     func deleteFromModel(_ deletionUUID: UUID?) {
         if let id = deletionUUID {
             var strengthIterator = strengthWorkoutEntries.makeIterator()
@@ -81,7 +81,7 @@ class ViewModel: ObservableObject {
         }
         return result
     }
-    
+
     /// Gets the highest possible weight for the given name.
     /// - Parameters:
     ///  - name the name of the exercise to check
@@ -103,7 +103,7 @@ class ViewModel: ObservableObject {
         var result = [WorkoutEntry]()
         result.append(contentsOf: strengthWorkoutEntries)
         result.append(contentsOf: enduranceWorkoutEntries)
-        
+
         return result.sorted(by: {
             $0.timestamp.compare($1.timestamp) == .orderedAscending
         })

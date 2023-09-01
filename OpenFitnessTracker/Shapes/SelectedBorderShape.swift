@@ -11,7 +11,7 @@ import SwiftUI
 struct SelectedBorderShape: Shape {
     var sides: [Edge]
     var cornerRadius: CGFloat = 5.0
-    
+
     func path(in rect: CGRect) -> Path {
         var path = Path()
 
