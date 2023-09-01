@@ -49,7 +49,13 @@ struct StatisticsSceneView: View {
                         Button(workout) {
                             presentPopover = true
                         }.popover(isPresented: $presentPopover) {
-                            // TODO: create new statistics view
+                            DetailEnduranceStatisticsView(
+                                name: workout,
+                                distanceUnit: viewModel.settings.distanceUnit,
+                                workouts: viewModel.enduranceWorkoutEntries.filter(
+                                    { $0.name == workout }
+                                )
+                            )
                         }
                     }
                     .foregroundColor(.blue)
@@ -57,7 +63,13 @@ struct StatisticsSceneView: View {
                         Button(workout) {
                             presentPopover = true
                         }.popover(isPresented: $presentPopover) {
-                            // TODO: create new statistics view
+                            DetailStrengthStatisticsView(
+                                name: workout,
+                                weightUnit: viewModel.settings.weightUnit,
+                                workouts: viewModel.strengthWorkoutEntries.filter(
+                                    { $0.name == workout }
+                                )
+                            )
                         }
                     }
                     .foregroundColor(.blue)
