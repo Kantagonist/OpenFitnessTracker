@@ -128,6 +128,24 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
+		4C767D852AA21F7A009084CE /* WorkoutEntryDisplays */ = {
+			isa = PBXGroup;
+			children = (
+				4C2ED0BB2A7444CD00A4B683 /* EnduranceEntryBoxView.swift */,
+				4CA7AB922A72898B0073FE31 /* StrengthEntryBoxView.swift */,
+				4C7F67D32A76B27300199171 /* WorkoutEntryHeaderView.swift */,
+			);
+			path = WorkoutEntryDisplays;
+			sourceTree = "<group>";
+		};
+		4C767D862AA21FD8009084CE /* WorkoutListPicker */ = {
+			isa = PBXGroup;
+			children = (
+				4C57DA6F2A7D20CE00858186 /* WorkoutListPicker.swift */,
+			);
+			path = WorkoutListPicker;
+			sourceTree = "<group>";
+		};
 		4C7F67D82A76C02C00199171 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,11 +240,9 @@
 		4CE241292A1E06D1006080B3 /* UiElements */ = {
 			isa = PBXGroup;
 			children = (
+				4C767D862AA21FD8009084CE /* WorkoutListPicker */,
+				4C767D852AA21F7A009084CE /* WorkoutEntryDisplays */,
 				4CAEF1FE2A865CB000D3A275 /* Statistics */,
-				4CA7AB922A72898B0073FE31 /* StrengthEntryBoxView.swift */,
-				4C2ED0BB2A7444CD00A4B683 /* EnduranceEntryBoxView.swift */,
-				4C7F67D32A76B27300199171 /* WorkoutEntryHeaderView.swift */,
-				4C57DA6F2A7D20CE00858186 /* WorkoutListPicker.swift */,
 			);
 			path = UiElements;
 			sourceTree = "<group>";
