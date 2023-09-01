@@ -35,7 +35,8 @@ Short-term goals:
 
 Long-term goals:
 - [ ] Integrate a Database functionality for saving and deleting workout locally
-- [ ] Linting and comprehensive documentation in the code
+- [x] Linting
+- [ ] Extensive documentation in the code
 - [x] Turn the Personal information page into statistics page
 - [ ] Integrate Apple's Health app.
 
