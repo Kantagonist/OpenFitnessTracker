@@ -8,6 +8,7 @@
 import SwiftUI
 import Charts
 
+/// Shows detailed workout data of all given endurance entries.
 struct DetailStrengthStatisticsView: View {
     
     let name: String
