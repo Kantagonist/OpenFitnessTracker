@@ -64,4 +64,48 @@ class ViewModel: ObservableObject {
         try await Task.sleep(nanoseconds: 2 * 1_000_000_000)
         self.isInQuery = false
     }
+
+    // MARK: Misc Data Getters
+
+    /// Gets the highest possible distance for the given name.
+    /// - Parameters:
+    ///  - name the name of the exercise to check
+    /// - Returns: the highest known value or 0 if none exists.
+    func getHighestEnduranceDistance(for name: String) -> Double {
+        var result: Double = 0
+        for entry in enduranceWorkoutEntries {
+            let distance = entry.getConvertedDistanceUnit(for: settings.distanceUnit)
+            if distance > result {
+                result = distance
+            }
+        }
+        return result
+    }
+    
+    /// Gets the highest possible weight for the given name.
+    /// - Parameters:
+    ///  - name the name of the exercise to check
+    /// - Returns: the highest known value or 0 if none exists.
+    func getHighestStrengthWeight(for name: String) -> Double {
+        var result: Double = 0
+        for entry in strengthWorkoutEntries {
+            let distance = entry.getConvertedWeightUnit(for: settings.weightUnit)
+            if distance > result {
+                result = distance
+            }
+        }
+        return result
+    }
+
+    /// Sorts all entries by date and returns in ascending order.
+    /// - Returns: A list of workouts in ascending order
+    func allWorkoutsSortedByDate() -> [WorkoutEntry] {
+        var result = [WorkoutEntry]()
+        result.append(contentsOf: strengthWorkoutEntries)
+        result.append(contentsOf: enduranceWorkoutEntries)
+        
+        return result.sorted(by: {
+            $0.timestamp.compare($1.timestamp) == .orderedAscending
+        })
+    }
 }

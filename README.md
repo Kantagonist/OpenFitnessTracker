@@ -31,11 +31,12 @@ Short-term goals:
 - [x] A more beautiful UI for the Workout entry displays
 - [x] Unified settings & more expansive Settings
 - [ ] Adjustable personal information
+- [ ] fix missing axis description in statistics and make them scrollable
 
 Long-term goals:
 - [ ] Integrate a Database functionality for saving and deleting workout locally
 - [ ] Linting and comprehensive documentation in the code
-- [ ] Turn the Personal information page into statistics page
+- [x] Turn the Personal information page into statistics page
 - [ ] Integrate Apple's Health app.
 
 ## Licensing
