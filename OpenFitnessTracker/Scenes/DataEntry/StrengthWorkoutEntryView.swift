@@ -57,17 +57,7 @@ struct StrengthWorkoutEntryView: View {
             }.navigationTitle("New Workout Entry")
                 .fixedSize(horizontal: false, vertical: false)
             Button(action: {
-                viewModel.strengthWorkoutEntries.append(
-                    StrengthWorkoutEntry(
-                        name: name,
-                        timestamp: date,
-                        sets: sets,
-                        reps: reps,
-                        weight: weight,
-                        recordedWeightUnit: viewModel.settings.weightUnit
-                    )
-                )
-                
+                createStrengthEntry()
                 isPresented = false
             }, label: {
                 Text("Submit")
@@ -79,6 +69,29 @@ struct StrengthWorkoutEntryView: View {
                 .cornerRadius(16.0)
                 .padding(.bottom, 16.0)
         }
+    }
+
+    private func createStrengthEntry() {
+        let domainEntry = StrengthWorkoutEntry(
+            name: name,
+            timestamp: date,
+            sets: sets,
+            reps: reps,
+            weight: weight,
+            recordedWeightUnit: viewModel.settings.weightUnit
+        )
+        viewModel.strengthWorkoutEntries.append(
+            domainEntry
+        )
+        let dbEntry = StrengthWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
+        dbEntry.id = domainEntry.id
+        dbEntry.name = domainEntry.name
+        dbEntry.timestamp = domainEntry.timestamp
+        dbEntry.sets = Int32(domainEntry.sets)
+        dbEntry.reps = Int32(domainEntry.reps)
+        dbEntry.weight = domainEntry.getConvertedWeightUnit(for: domainEntry.recordedWeightUnit)
+        dbEntry.recordedWeightUnit = domainEntry.recordedWeightUnit.rawValue
+        try! viewModel.coreDataPersistenceContainer.viewContext.save()
     }
 }
 

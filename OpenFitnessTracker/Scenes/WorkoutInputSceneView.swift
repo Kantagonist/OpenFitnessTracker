@@ -33,15 +33,15 @@ struct WorkoutInputSceneView: View {
                     // Render chosen entries
                     switch entryShown {
                     case .strength:
-                        if viewModel.strengthWorkoutEntries.isEmpty {
+                        if viewModel.strengthWorkouts.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()
                             }
                         } else {
-                            ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
+                            ForEach(viewModel.strengthWorkouts) { strengthWorkoutEntry in
                                 StrengthEntryBoxView(
-                                    entry: strengthWorkoutEntry
+                                    entry: strengthWorkoutEntry.convertToDomainVersion()
                                 )
                             }
                         }

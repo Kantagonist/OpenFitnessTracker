@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import CoreData
+import SwiftUI
 
 /// A central point for data handling
 class ViewModel: ObservableObject {
@@ -21,6 +23,16 @@ class ViewModel: ObservableObject {
         }
         return instance!
     }
+
+    init() {
+        coreDataPersistenceContainer.loadPersistentStores { description, error in
+            if let error = error {
+                print("Core Data failed to load: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    // MARK: Delete From Model
 
     func deleteFromModel(_ deletionUUID: UUID?) {
         if let id = deletionUUID {
@@ -47,23 +59,15 @@ class ViewModel: ObservableObject {
 
     // MARK: Values
 
-    @Published var strengthWorkoutEntries = [StrengthWorkoutEntry]()
-    @Published var enduranceWorkoutEntries =  [EnduranceWorkoutEntry]()
+    var strengthWorkoutEntries = [StrengthWorkoutEntry]()
+    @Published var enduranceWorkoutEntries = [EnduranceWorkoutEntry]()
     @Published var settings = Settings()
 
     // MARK: Data Query Handling
 
-    @Published var isInQuery = false
+    let coreDataPersistenceContainer = NSPersistentContainer(name: "Workouts")
 
-    /// Queries the database for data.
-    /// Lock up UI with loading dialog via the isInQuery variable
-    @MainActor
-    func getData() async throws {
-        self.isInQuery = true
-        // TODO: replace with actual value change and DB calls
-        try await Task.sleep(nanoseconds: 2 * 1_000_000_000)
-        self.isInQuery = false
-    }
+    @FetchRequest(sortDescriptors: []) var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
 
     // MARK: Misc Data Getters
 
@@ -107,5 +111,48 @@ class ViewModel: ObservableObject {
         return result.sorted(by: {
             $0.timestamp.compare($1.timestamp) == .orderedAscending
         })
+    }
+}
+
+// MARK: DB Extensions
+
+extension StrengthWorkoutEntryDB {
+    private func getWeightUnit() -> WeightUnit {
+        if recordedWeightUnit == "kg" {
+            return .kg
+        } else {
+            return .lbs
+        }
+    }
+    func convertToDomainVersion() -> StrengthWorkoutEntry {
+        return StrengthWorkoutEntry(
+            id: id!,
+            name: name!,
+            timestamp: timestamp!,
+            sets: Int(sets),
+            reps: Int(sets),
+            weight: weight,
+            recordedWeightUnit: getWeightUnit()
+        )
+    }
+}
+
+extension EnduranceWorkoutEntryDB {
+    private func getDistanceUnit() -> DistanceUnit {
+        if recordedDistanceUnit == "km" {
+            return .km
+        } else {
+            return .mile
+        }
+    }
+    func convertToDomainVersion() -> EnduranceWorkoutEntry {
+        return EnduranceWorkoutEntry(
+            id: id!,
+            name: name!,
+            timestamp: timestamp!,
+            durationInMilliseconds: UInt64(durationInMilliseconds),
+            distance: distance,
+            recordedDistanceUnit: getDistanceUnit()
+        )
     }
 }
