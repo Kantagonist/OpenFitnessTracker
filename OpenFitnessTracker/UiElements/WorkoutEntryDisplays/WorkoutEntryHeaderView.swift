@@ -12,10 +12,9 @@ struct WorkoutEntryHeaderView: View {
 
     /// Informal access to the viewModel state.
     /// Allows the user to change the state of views which are higher up in the hierarchy.
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject private var viewModel: ViewModel
 
     let entry: WorkoutEntry
-    let settings: Settings
 
     // MARK: View
 
@@ -28,17 +27,17 @@ struct WorkoutEntryHeaderView: View {
                     HStack {
                         Text(entry.name)
                             .font(.system(size: 24))
-                            .foregroundColor(settings.headerTextColor)
+                            .foregroundColor(viewModel.settings.headerTextColor)
                             .padding()
                         Spacer()
                         Text(entry.timestamp.formatted(date: .numeric, time: .omitted))
                             .font(.system(size: 24))
-                            .foregroundColor(settings.headerTextColor)
+                            .foregroundColor(viewModel.settings.headerTextColor)
                             .padding()
                     }
                     .padding(10.0)
-                    .background(settings.headerBackgroundColor)
-                    .shadow(color: settings.headerBackgroundColor, radius: 10, x: 0, y: 0)
+                    .background(viewModel.settings.headerBackgroundColor)
+                    .shadow(color: viewModel.settings.headerBackgroundColor, radius: 10, x: 0, y: 0)
                     Spacer()
                         .frame(width: 20)
                 }
@@ -74,9 +73,9 @@ struct WorkoutEntryHeaderView_Previews: PreviewProvider {
         HStack {
             Spacer().frame(width: 20)
             WorkoutEntryHeaderView(
-                entry: demoEntry,
-                settings: Settings()
+                entry: demoEntry
             )
+                .environmentObject(ViewModel.getInstance())
             Spacer()
                 .frame(width: 20)
         }

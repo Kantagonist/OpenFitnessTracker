@@ -10,10 +10,8 @@ import SwiftUI
 /// A parent Scene, which lets the user decide which entry to create via a picker at the top
 struct ChooseDataEntryView: View {
 
-    @Binding var existingStrengthEntries: [StrengthWorkoutEntry]
-    @Binding var existingEnduranceEntries: [EnduranceWorkoutEntry]
+    @EnvironmentObject private var viewModel: ViewModel
     @Binding var isPresented: Bool
-    let settings: Settings
 
     @State private var entryShown: EntryType = .strength
 
@@ -31,15 +29,11 @@ struct ChooseDataEntryView: View {
             switch entryShown {
             case .strength:
                 StrengthWorkoutEntryView(
-                    existingEntries: $existingStrengthEntries,
-                    isPresented: $isPresented,
-                    settings: settings
+                    isPresented: $isPresented
                 )
             case .endurance:
                 EnduranceWorkoutEntryView(
-                    existingEntries: $existingEnduranceEntries,
-                    isPresented: $isPresented,
-                    settings: settings
+                    isPresented: $isPresented
                 )
             }
         }
@@ -50,16 +44,11 @@ struct ChooseDataEntryView: View {
 
 struct ChooseDataEntryView_Previews: PreviewProvider {
 
-    @State private static var demoStrengthEntries = [StrengthWorkoutEntry]()
-    @State private static var demoEnduranceEntries = [EnduranceWorkoutEntry]()
     @State private static var present = true
 
     static var previews: some View {
         ChooseDataEntryView(
-            existingStrengthEntries: $demoStrengthEntries,
-            existingEnduranceEntries: $demoEnduranceEntries,
-            isPresented: $present,
-            settings: Settings()
+            isPresented: $present
         )
     }
 }

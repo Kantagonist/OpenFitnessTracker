@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C12072C2AB2EF6700D4AE6D /* Workouts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4C12072A2AB2EF6700D4AE6D /* Workouts.xcdatamodeld */; };
 		4C2ED0BC2A7444CD00A4B683 /* EnduranceEntryBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2ED0BB2A7444CD00A4B683 /* EnduranceEntryBoxView.swift */; };
 		4C2ED0BE2A74512E00A4B683 /* ChooseDataEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C2ED0BD2A74512E00A4B683 /* ChooseDataEntryView.swift */; };
 		4C35AF9D2A1CFBC500DA3204 /* StatisticsSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C35AF9C2A1CFBC500DA3204 /* StatisticsSceneView.swift */; };
@@ -52,6 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4C12072B2AB2EF6700D4AE6D /* Workouts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Workouts.xcdatamodel; sourceTree = "<group>"; };
 		4C2ED0BB2A7444CD00A4B683 /* EnduranceEntryBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnduranceEntryBoxView.swift; sourceTree = "<group>"; };
 		4C2ED0BD2A74512E00A4B683 /* ChooseDataEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDataEntryView.swift; sourceTree = "<group>"; };
 		4C35AF9C2A1CFBC500DA3204 /* StatisticsSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsSceneView.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 				4CE241242A1DFD72006080B3 /* ViewModel.swift */,
 				4CE241272A1E024B006080B3 /* WorkoutDataStructs.swift */,
 				4CB2D0CB2A7440EF00778593 /* SettingsDataStructs.swift */,
+				4C12072A2AB2EF6700D4AE6D /* Workouts.xcdatamodeld */,
 			);
 			path = DataManagement;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				4C81AAE12A051BEA0095D519 /* ContentView.swift in Sources */,
 				4C81AADF2A051BEA0095D519 /* OpenFitnessTrackerApp.swift in Sources */,
 				4CAEF2042A87FBE200D3A275 /* DetailEnduranceStatisticsView.swift in Sources */,
+				4C12072C2AB2EF6700D4AE6D /* Workouts.xcdatamodeld in Sources */,
 				4C2ED0BE2A74512E00A4B683 /* ChooseDataEntryView.swift in Sources */,
 				4C57DA702A7D20CE00858186 /* WorkoutListPicker.swift in Sources */,
 				4CE9D3EC2A740E7900942190 /* EnduranceWorkoutEntryView.swift in Sources */,
@@ -727,6 +731,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		4C12072A2AB2EF6700D4AE6D /* Workouts.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4C12072B2AB2EF6700D4AE6D /* Workouts.xcdatamodel */,
+			);
+			currentVersion = 4C12072B2AB2EF6700D4AE6D /* Workouts.xcdatamodel */;
+			path = Workouts.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 4C81AAD32A051BEA0095D519 /* Project object */;
 }

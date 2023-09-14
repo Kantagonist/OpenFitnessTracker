@@ -13,11 +13,8 @@ import SwiftUI
 /// Uses a binding to add to a given list of workouts in the model.
 struct StrengthWorkoutEntryView: View {
 
-    // References the existing central list of workout entries.
-    // This binding is used to manipulate the original source of truth.
-    @Binding var existingEntries: [StrengthWorkoutEntry]
     @Binding var isPresented: Bool
-    let settings: Settings
+    @EnvironmentObject private var viewModel: ViewModel
 
     // Form Entry state variables
     @State private var date = Date()
@@ -31,45 +28,46 @@ struct StrengthWorkoutEntryView: View {
             Form {
                 Section(content: {
                     DatePicker("Date:", selection: $date, displayedComponents: .date)
-                        .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                 }, header: {
                     Text("Date")
                 })
                 Section(content: {
                     Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< settings.strWorkouts.count, id: \.self) { name in
-                            Text(settings.strWorkouts[name])
+                        ForEach(0 ..< viewModel.settings.strWorkouts.count, id: \.self) { name in
+                            Text(viewModel.settings.strWorkouts[name])
                         }
                     })
-                    .foregroundColor(settings.textColor)
+                    .foregroundColor(viewModel.settings.textColor)
                     Stepper("Sets: \(sets)", value: $sets, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                     Stepper("Reps: \(reps)", value: $reps, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(settings.textColor)
-                    Stepper("Weight: \(String(format: "%.1f", weight)) \(settings.weightUnit.rawValue)", value: $weight, in: 0...Double(Int.max), step: 2.5)
+                        .foregroundColor(viewModel.settings.textColor)
+                    Stepper("Weight: \(String(format: "%.1f", weight)) \(viewModel.settings.weightUnit.rawValue)", value: $weight, in: 0...Double(Int.max), step: 2.5)
                     .padding(.top)
                     .padding(.bottom)
-                    .foregroundColor(settings.textColor)
+                    .foregroundColor(viewModel.settings.textColor)
                 }, header: {
                     Text("Entry")
                 })
             }.navigationTitle("New Workout Entry")
                 .fixedSize(horizontal: false, vertical: false)
             Button(action: {
-                existingEntries.append(
+                viewModel.strengthWorkoutEntries.append(
                     StrengthWorkoutEntry(
                         name: name,
                         timestamp: date,
                         sets: sets,
                         reps: reps,
                         weight: weight,
-                        recordedWeightUnit: settings.weightUnit
+                        recordedWeightUnit: viewModel.settings.weightUnit
                     )
                 )
+                
                 isPresented = false
             }, label: {
                 Text("Submit")
@@ -97,9 +95,8 @@ struct WorkoutEntryView_Previews: PreviewProvider {
 
     static var previews: some View {
         StrengthWorkoutEntryView(
-            existingEntries: $entries,
-            isPresented: $show,
-            settings: settings
+            isPresented: $show
         )
+            .environmentObject(ViewModel.getInstance())
     }
 }

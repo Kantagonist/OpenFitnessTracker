@@ -11,8 +11,7 @@ import SwiftUI
 struct WorkoutInputSceneView: View {
 
     /// Source of truth for workout-entries
-    @StateObject private var viewModel = ViewModel.getInstance()
-
+    @EnvironmentObject private var viewModel: ViewModel
     /// Boolean to control popover workout entry screen trigger
     @State private var isShowingEntryForm = false
     /// Shows which entries to show
@@ -42,8 +41,7 @@ struct WorkoutInputSceneView: View {
                         } else {
                             ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
                                 StrengthEntryBoxView(
-                                    entry: strengthWorkoutEntry,
-                                    settings: viewModel.settings
+                                    entry: strengthWorkoutEntry
                                 )
                             }
                         }
@@ -56,8 +54,7 @@ struct WorkoutInputSceneView: View {
                         } else {
                             ForEach(viewModel.enduranceWorkoutEntries) { enduranceWorkoutEntry in
                                 EnduranceEntryBoxView(
-                                    entry: enduranceWorkoutEntry,
-                                    settings: viewModel.settings
+                                    entry: enduranceWorkoutEntry
                                 )
                             }
                         }
@@ -71,10 +68,7 @@ struct WorkoutInputSceneView: View {
                 isShowingEntryForm = true
             }.popover(isPresented: $isShowingEntryForm) {
                 ChooseDataEntryView(
-                    existingStrengthEntries: $viewModel.strengthWorkoutEntries,
-                    existingEnduranceEntries: $viewModel.enduranceWorkoutEntries,
-                    isPresented: $isShowingEntryForm,
-                    settings: viewModel.settings
+                    isPresented: $isShowingEntryForm
                 )
             }
             .frame(width: 50.0, height: 50.0)
@@ -91,5 +85,6 @@ struct WorkoutInputSceneView: View {
 struct WorkoutInputSceneView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutInputSceneView()
+         .environmentObject(ViewModel.getInstance())
     }
 }

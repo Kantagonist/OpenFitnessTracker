@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
+
+    @StateObject private var model = ViewModel.getInstance()
+
     var body: some View {
         TabCollection()
+            .environmentObject(model)
     }
 }
 

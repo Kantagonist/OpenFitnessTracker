@@ -13,10 +13,8 @@ import SwiftUI
 /// Uses a binding to add to a given list of workouts in the model
 struct EnduranceWorkoutEntryView: View {
 
-    // References the existing central list of workout entries.
-    @Binding var existingEntries: [EnduranceWorkoutEntry]
+    @EnvironmentObject private var viewModel: ViewModel
     @Binding var isPresented: Bool
-    let settings: Settings
 
     @State private var date = Date()
     @State private var name = ""
@@ -36,21 +34,21 @@ struct EnduranceWorkoutEntryView: View {
             Form {
                 Section(content: {
                     DatePicker("Date:", selection: $date, displayedComponents: .date)
-                    .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                 }, header: {
                     Text("Date")
                 })
                 Section(content: {
                     Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< settings.endWorkouts.count, id: \.self) { name in
-                            Text(settings.endWorkouts[name])
+                        ForEach(0 ..< viewModel.settings.endWorkouts.count, id: \.self) { name in
+                            Text(viewModel.settings.endWorkouts[name])
                         }
                     })
-                    .foregroundColor(settings.textColor)
-                    Stepper("Distance: \(String(format: "%.1f", distance)) \(settings.distanceUnit.rawValue)", value: $distance, in: 0...Double(Int.max), step: enduranceLengthIncrement)
+                    .foregroundColor(viewModel.settings.textColor)
+                    Stepper("Distance: \(String(format: "%.1f", distance)) \(viewModel.settings.distanceUnit.rawValue)", value: $distance, in: 0...Double(Int.max), step: enduranceLengthIncrement)
                     .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                     VStack {
                         Text("Time")
                         HStack(alignment: .center, spacing: 0) {
@@ -85,13 +83,13 @@ struct EnduranceWorkoutEntryView: View {
             }
             .navigationTitle("New Workout Entry")
             Button(action: {
-                existingEntries.append(
+                viewModel.enduranceWorkoutEntries.append(
                     EnduranceWorkoutEntry(
                         name: name,
                         timestamp: date,
                         durationInMilliseconds: durationInMilliseconds,
                         distance: distance,
-                        recordedDistanceUnit: settings.distanceUnit
+                        recordedDistanceUnit: viewModel.settings.distanceUnit
                     )
                 )
                 isPresented = false
@@ -116,14 +114,11 @@ private let enduranceLengthIncrement: Double = 0.1
 
 struct EnduranceWorkoutEntryView_Previews: PreviewProvider {
 
-    @State private static var entries = [EnduranceWorkoutEntry]()
     @State private static var show = true
 
     static var previews: some View {
         EnduranceWorkoutEntryView(
-            existingEntries: $entries,
-            isPresented: $show,
-            settings: Settings()
+            isPresented: $show
         )
     }
 }
