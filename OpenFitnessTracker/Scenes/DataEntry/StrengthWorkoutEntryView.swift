@@ -80,9 +80,11 @@ struct StrengthWorkoutEntryView: View {
             weight: weight,
             recordedWeightUnit: viewModel.settings.weightUnit
         )
+        /*
         viewModel.strengthWorkoutEntries.append(
             domainEntry
         )
+         */
         let dbEntry = StrengthWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
         dbEntry.id = domainEntry.id
         dbEntry.name = domainEntry.name
@@ -92,6 +94,10 @@ struct StrengthWorkoutEntryView: View {
         dbEntry.weight = domainEntry.getConvertedWeightUnit(for: domainEntry.recordedWeightUnit)
         dbEntry.recordedWeightUnit = domainEntry.recordedWeightUnit.rawValue
         try! viewModel.coreDataPersistenceContainer.viewContext.save()
+        
+        // TODO: Save doesnt' work
+        // find way to make safe work and replace usage of viewModel values.
+        // Instead they should just function as domain conversions for the DB generated values.
     }
 }
 
