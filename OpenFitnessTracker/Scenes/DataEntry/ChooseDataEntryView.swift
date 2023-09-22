@@ -50,5 +50,6 @@ struct ChooseDataEntryView_Previews: PreviewProvider {
         ChooseDataEntryView(
             isPresented: $present
         )
+            .environmentObject(ViewModel.getInstance())
     }
 }

@@ -62,15 +62,15 @@ struct WorkoutInputSceneView: View {
                             }
                         }
                     case .endurance:
-                        if viewModel.enduranceWorkoutEntries.isEmpty {
+                        if enduranceWorkouts.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()
                             }
                         } else {
-                            ForEach(viewModel.enduranceWorkoutEntries) { enduranceWorkoutEntry in
+                            ForEach(enduranceWorkouts) { enduranceWorkoutEntry in
                                 EnduranceEntryBoxView(
-                                    entry: enduranceWorkoutEntry
+                                    entry: enduranceWorkoutEntry.convertToDomainVersion()
                                 )
                             }
                         }

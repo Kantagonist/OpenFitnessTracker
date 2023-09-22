@@ -14,15 +14,13 @@ import SwiftUI
 struct EnduranceWorkoutEntryView: View {
 
     @EnvironmentObject private var viewModel: ViewModel
+
     @Binding var isPresented: Bool
 
     @State private var date = Date()
     @State private var name = ""
     private var durationInMilliseconds: UInt64 {
-        get {
-            return UInt64(hours * minutes * seconds * 1_000)
-        }
-        set { _ = newValue }
+        return UInt64(hours * minutes * seconds * 1_000)
     }
     @State private var distance: Double = 0.0
     @State private var seconds: Int = 0
@@ -83,15 +81,7 @@ struct EnduranceWorkoutEntryView: View {
             }
             .navigationTitle("New Workout Entry")
             Button(action: {
-                viewModel.enduranceWorkoutEntries.append(
-                    EnduranceWorkoutEntry(
-                        name: name,
-                        timestamp: date,
-                        durationInMilliseconds: durationInMilliseconds,
-                        distance: distance,
-                        recordedDistanceUnit: viewModel.settings.distanceUnit
-                    )
-                )
+                createDBEntry()
                 isPresented = false
             }, label: {
                 Text("Submit")
@@ -103,6 +93,19 @@ struct EnduranceWorkoutEntryView: View {
                 .cornerRadius(16.0)
                 .padding(.bottom, 16.0)
         }
+    }
+
+    /// Creates a new entry in the persistent DB.
+    /// Based on the data model in the Workouts DB
+    private func createDBEntry() {
+        let dbEntry = EnduranceWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
+        dbEntry.id = UUID()
+        dbEntry.name = name
+        dbEntry.timestamp = date
+        dbEntry.durationInMilliseconds = Int64(durationInMilliseconds)
+        dbEntry.distance = distance
+        dbEntry.recordedDistanceUnit = viewModel.settings.distanceUnit.rawValue
+        try! viewModel.coreDataPersistenceContainer.viewContext.save()
     }
 }
 
@@ -120,5 +123,6 @@ struct EnduranceWorkoutEntryView_Previews: PreviewProvider {
         EnduranceWorkoutEntryView(
             isPresented: $show
         )
+            .environmentObject(ViewModel.getInstance())
     }
 }

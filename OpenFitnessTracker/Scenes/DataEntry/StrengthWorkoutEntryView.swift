@@ -77,7 +77,7 @@ struct StrengthWorkoutEntryView: View {
         let dbEntry = StrengthWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
         dbEntry.id = UUID()
         dbEntry.name = name
-        dbEntry.timestamp = Date()
+        dbEntry.timestamp = date
         dbEntry.sets = Int32(sets)
         dbEntry.reps = Int32(reps)
         dbEntry.weight = weight
