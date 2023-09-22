@@ -39,9 +39,8 @@ Short-term goals:
 - [ ] central styles
 
 Long-term goals:
-- [ ] Integrate a Database functionality for saving and deleting workout locally
+- [x] Integrate a Database functionality for saving and deleting workout locally
 - [x] Linting
-- [ ] Extensive documentation in the code
 - [x] Turn the Personal information page into statistics page
 - [ ] Integrate Apple's Health app.
 
