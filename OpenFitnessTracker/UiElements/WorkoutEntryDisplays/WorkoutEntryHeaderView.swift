@@ -10,6 +10,12 @@ import SwiftUI
 /// A parental view element, which allows the user to display a generic  headline for their workout entry.
 struct WorkoutEntryHeaderView: View {
 
+    /// Data request for all strength workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: []) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
+    
+    /// Data request for all endurance workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: []) private var enduranceWorkouts: FetchedResults<EnduranceWorkoutEntryDB>
+
     /// Informal access to the viewModel state.
     /// Allows the user to change the state of views which are higher up in the hierarchy.
     @EnvironmentObject private var viewModel: ViewModel
@@ -47,7 +53,7 @@ struct WorkoutEntryHeaderView: View {
                 HStack {
                     Spacer()
                     Button("X", action: {
-                        viewModel.deleteFromModel(entry.id)
+                        deleteEntryFromDB(with: entry.id)
                     })
                     .frame(width: 40, height: 40)
                     .background(Color.gray)
@@ -57,6 +63,25 @@ struct WorkoutEntryHeaderView: View {
                 Spacer()
             }
             .frame(maxHeight: 100)
+        }
+    }
+
+    /// Deletes the given entry from the DB.
+    /// - Parameter id: The UUID of the entry to delete
+    private func deleteEntryFromDB(with id: UUID) {
+        for entry in strengthWorkouts {
+            if entry.id == id {
+                viewModel.coreDataPersistenceContainer.viewContext.delete(entry)
+                try! viewModel.coreDataPersistenceContainer.viewContext.save()
+                return
+            }
+        }
+        for entry in enduranceWorkouts {
+            if entry.id == id {
+                viewModel.coreDataPersistenceContainer.viewContext.delete(entry)
+                try! viewModel.coreDataPersistenceContainer.viewContext.save()
+                return
+            }
         }
     }
 }

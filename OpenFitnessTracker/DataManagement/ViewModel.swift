@@ -32,31 +32,6 @@ class ViewModel: ObservableObject {
         }
     }
 
-    // MARK: Delete From Model
-
-    func deleteFromModel(_ deletionUUID: UUID?) {
-        if let id = deletionUUID {
-            var strengthIterator = strengthWorkoutEntries.makeIterator()
-            var i = 0
-            while let entry = strengthIterator.next() {
-                if entry.id == id {
-                    strengthWorkoutEntries.remove(at: i)
-                    break
-                }
-                i += 1
-            }
-            var enduranceIterator = enduranceWorkoutEntries.makeIterator()
-            i = 0
-            while let entry = enduranceIterator.next() {
-                if entry.id == id {
-                    enduranceWorkoutEntries.remove(at: i)
-                    break
-                }
-                i += 0
-            }
-        }
-    }
-
     // MARK: Values
 
     var strengthWorkoutEntries = [StrengthWorkoutEntry]()
