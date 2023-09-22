@@ -16,7 +16,7 @@ struct StrengthWorkoutEntryView: View {
 
     // Form Entry state variables
     @State private var date = Date()
-    @State private var name = ""
+    @State private var nameIndex = 0
     @State private var reps = 0
     @State private var sets = 0
     @State private var weight: Double = 0.0
@@ -33,9 +33,9 @@ struct StrengthWorkoutEntryView: View {
                     Text("Date")
                 })
                 Section(content: {
-                    Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< viewModel.settings.strWorkouts.count, id: \.self) { name in
-                            Text(viewModel.settings.strWorkouts[name])
+                    Picker("Name", selection: $nameIndex, content: {
+                        ForEach(Array(viewModel.settings.strWorkouts.enumerated()), id: \.element) { (index, item) in
+                            Text(item).tag(index)
                         }
                     })
                     .foregroundColor(viewModel.settings.textColor)
@@ -76,7 +76,7 @@ struct StrengthWorkoutEntryView: View {
     private func createDBEntry() {
         let dbEntry = StrengthWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
         dbEntry.id = UUID()
-        dbEntry.name = name
+        dbEntry.name = viewModel.settings.strWorkouts[nameIndex]
         dbEntry.timestamp = date
         dbEntry.sets = Int32(sets)
         dbEntry.reps = Int32(reps)

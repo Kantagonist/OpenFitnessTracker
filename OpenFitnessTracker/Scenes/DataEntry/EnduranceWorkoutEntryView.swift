@@ -18,7 +18,7 @@ struct EnduranceWorkoutEntryView: View {
     @Binding var isPresented: Bool
 
     @State private var date = Date()
-    @State private var name = ""
+    @State private var nameIndex = 0
     private var durationInMilliseconds: UInt64 {
         return UInt64(hours * minutes * seconds * 1_000)
     }
@@ -37,9 +37,9 @@ struct EnduranceWorkoutEntryView: View {
                     Text("Date")
                 })
                 Section(content: {
-                    Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< viewModel.settings.endWorkouts.count, id: \.self) { name in
-                            Text(viewModel.settings.endWorkouts[name])
+                    Picker("Name", selection: $nameIndex, content: {
+                        ForEach(Array(viewModel.settings.endWorkouts.enumerated()), id: \.element) { (index, item) in
+                            Text(item).tag(index)
                         }
                     })
                     .foregroundColor(viewModel.settings.textColor)
@@ -100,7 +100,7 @@ struct EnduranceWorkoutEntryView: View {
     private func createDBEntry() {
         let dbEntry = EnduranceWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
         dbEntry.id = UUID()
-        dbEntry.name = name
+        dbEntry.name = viewModel.settings.endWorkouts[nameIndex]
         dbEntry.timestamp = date
         dbEntry.durationInMilliseconds = Int64(durationInMilliseconds)
         dbEntry.distance = distance
