@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import CoreData
 
 /// A data representation of a given workout entry.
 /// All objects of this class and its subclasses are uniquely identifiable.
 class WorkoutEntry: Identifiable {
-    let id = UUID()
+    let id: UUID
     let name: String
     let timestamp: Date
 
-    init(name: String, timestamp: Date) {
+    init(id: UUID = UUID(), name: String, timestamp: Date) {
+        self.id = id
         self.name = name
         self.timestamp = timestamp
     }
@@ -26,12 +28,12 @@ class StrengthWorkoutEntry: WorkoutEntry {
     private let weight: Double
     let recordedWeightUnit: WeightUnit
 
-    init(name: String, timestamp: Date, sets: Int, reps: Int, weight: Double, recordedWeightUnit: WeightUnit) {
+    init(id: UUID = UUID(), name: String, timestamp: Date, sets: Int, reps: Int, weight: Double, recordedWeightUnit: WeightUnit) {
         self.sets = sets
         self.reps = reps
         self.weight = weight
         self.recordedWeightUnit = recordedWeightUnit
-        super.init(name: name, timestamp: timestamp)
+        super.init(id: id, name: name, timestamp: timestamp)
     }
 
     /// Gets the structs distance converted to the given distance unit.
@@ -56,11 +58,11 @@ class EnduranceWorkoutEntry: WorkoutEntry {
     private let distance: Double
     let recordedDistanceUnit: DistanceUnit
 
-    init(name: String, timestamp: Date, durationInMilliseconds: UInt64, distance: Double, recordedDistanceUnit: DistanceUnit) {
+    init(id: UUID = UUID(), name: String, timestamp: Date, durationInMilliseconds: UInt64, distance: Double, recordedDistanceUnit: DistanceUnit) {
         self.durationInMilliseconds = durationInMilliseconds
         self.distance = distance
         self.recordedDistanceUnit = recordedDistanceUnit
-        super.init(name: name, timestamp: timestamp)
+        super.init(id: id, name: name, timestamp: timestamp)
     }
 
     /// Gets the structs distance converted to the given distance unit.

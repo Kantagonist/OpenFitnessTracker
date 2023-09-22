@@ -12,18 +12,18 @@ import SwiftUI
 struct StrengthEntryBoxView: View {
 
     let entry: StrengthWorkoutEntry
-    let settings: Settings
+    @EnvironmentObject private var viewModel: ViewModel
 
     var body: some View {
         VStack(spacing: 0) {
-            WorkoutEntryHeaderView(entry: entry, settings: settings)
+            WorkoutEntryHeaderView(entry: entry)
             HStack {
                 Spacer()
                     .frame(width: 10)
                 VStack(spacing: 0) {
                     HStack(spacing: 0) {
                         Text("Sets: \(entry.sets)")
-                            .foregroundColor(settings.textColor)
+                            .foregroundColor(viewModel.settings.textColor)
                             .font(.system(size: 20))
                             .padding(16.0)
                             .frame(maxWidth: .infinity)
@@ -31,10 +31,10 @@ struct StrengthEntryBoxView: View {
                                 SelectedBorderShape(
                                     sides: [.leading, .trailing, .bottom]
                                 )
-                                .stroke(settings.textColor, lineWidth: 1.0)
+                                .stroke(viewModel.settings.textColor, lineWidth: 1.0)
                             )
                         Text("Reps: \(entry.reps)")
-                            .foregroundColor(settings.textColor)
+                            .foregroundColor(viewModel.settings.textColor)
                             .font(.system(size: 20))
                             .padding(16.0)
                             .frame(maxWidth: .infinity)
@@ -42,11 +42,11 @@ struct StrengthEntryBoxView: View {
                                 SelectedBorderShape(
                                     sides: [.trailing, .bottom]
                                 )
-                                .stroke(settings.textColor, lineWidth: 1.0)
+                                .stroke(viewModel.settings.textColor, lineWidth: 1.0)
                             )
                     }
-                    Text("\(String(format: "%.2f", entry.getConvertedWeightUnit(for: settings.weightUnit))) \(settings.weightUnit.rawValue)")
-                        .foregroundColor(settings.textColor)
+                    Text("\(String(format: "%.2f", entry.getConvertedWeightUnit(for: viewModel.settings.weightUnit))) \(viewModel.settings.weightUnit.rawValue)")
+                        .foregroundColor(viewModel.settings.textColor)
                         .font(.system(size: 20))
                         .padding(16.0)
                         .frame(maxWidth: .infinity)
@@ -54,7 +54,7 @@ struct StrengthEntryBoxView: View {
                             SelectedBorderShape(
                                 sides: [.leading, .trailing, .bottom]
                             )
-                            .stroke(settings.textColor, lineWidth: 1.0)
+                            .stroke(viewModel.settings.textColor, lineWidth: 1.0)
                         )
                 }
                 Spacer()
@@ -75,21 +75,14 @@ private let demoEntry = StrengthWorkoutEntry(
     recordedWeightUnit: .kg
 )
 
-private let demoSettings = Settings(
-    weightUnit: .kg,
-    distanceUnit: .km
-)
-
 struct StrengthEntryStatisticsBox_Previews: PreviewProvider {
 
     static var previews: some View {
         HStack {
             Spacer()
                 .frame(width: 20)
-            StrengthEntryBoxView(
-                entry: demoEntry,
-                settings: demoSettings
-            )
+            StrengthEntryBoxView(entry: demoEntry)
+                .environmentObject(ViewModel.getInstance())
             Spacer()
                 .frame(width: 20)
         }

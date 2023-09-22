@@ -36,6 +36,7 @@ Short-term goals:
 - [x] Unified settings & more expansive Settings
 - [ ] Adjustable personal information
 - [ ] fix missing axis description in statistics and make them scrollable
+- [ ] central styles
 
 Long-term goals:
 - [ ] Integrate a Database functionality for saving and deleting workout locally

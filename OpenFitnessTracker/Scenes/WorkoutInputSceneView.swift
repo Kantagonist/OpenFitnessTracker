@@ -10,13 +10,29 @@ import SwiftUI
 /// Scene which allows the user to input data into the system
 struct WorkoutInputSceneView: View {
 
+    // MARK: Data requests
+
+    /// Data request for all strength workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: [
+        NSSortDescriptor(key: "timestamp", ascending: false)
+    ]) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
+
+    /// Data request for all endurance workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: [
+        NSSortDescriptor(key: "timestamp", ascending: false)
+    ]) private var enduranceWorkouts: FetchedResults<EnduranceWorkoutEntryDB>
+
+    // MARK: State objects
+
     /// Source of truth for workout-entries
-    @StateObject private var viewModel = ViewModel.getInstance()
+    @EnvironmentObject private var viewModel: ViewModel
 
     /// Boolean to control popover workout entry screen trigger
     @State private var isShowingEntryForm = false
     /// Shows which entries to show
     @State private var entryShown: EntryType = .strength
+
+    // MARK: View
 
     var body: some View {
         ZStack {
@@ -34,30 +50,28 @@ struct WorkoutInputSceneView: View {
                     // Render chosen entries
                     switch entryShown {
                     case .strength:
-                        if viewModel.strengthWorkoutEntries.isEmpty {
+                        if strengthWorkouts.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()
                             }
                         } else {
-                            ForEach(viewModel.strengthWorkoutEntries) { strengthWorkoutEntry in
+                            ForEach(strengthWorkouts) { strengthWorkoutEntry in
                                 StrengthEntryBoxView(
-                                    entry: strengthWorkoutEntry,
-                                    settings: viewModel.settings
+                                    entry: strengthWorkoutEntry.convertToDomainVersion()
                                 )
                             }
                         }
                     case .endurance:
-                        if viewModel.enduranceWorkoutEntries.isEmpty {
+                        if enduranceWorkouts.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()
                             }
                         } else {
-                            ForEach(viewModel.enduranceWorkoutEntries) { enduranceWorkoutEntry in
+                            ForEach(enduranceWorkouts) { enduranceWorkoutEntry in
                                 EnduranceEntryBoxView(
-                                    entry: enduranceWorkoutEntry,
-                                    settings: viewModel.settings
+                                    entry: enduranceWorkoutEntry.convertToDomainVersion()
                                 )
                             }
                         }
@@ -71,10 +85,7 @@ struct WorkoutInputSceneView: View {
                 isShowingEntryForm = true
             }.popover(isPresented: $isShowingEntryForm) {
                 ChooseDataEntryView(
-                    existingStrengthEntries: $viewModel.strengthWorkoutEntries,
-                    existingEnduranceEntries: $viewModel.enduranceWorkoutEntries,
-                    isPresented: $isShowingEntryForm,
-                    settings: viewModel.settings
+                    isPresented: $isShowingEntryForm
                 )
             }
             .frame(width: 50.0, height: 50.0)
@@ -91,5 +102,6 @@ struct WorkoutInputSceneView: View {
 struct WorkoutInputSceneView_Previews: PreviewProvider {
     static var previews: some View {
         WorkoutInputSceneView()
+         .environmentObject(ViewModel.getInstance())
     }
 }

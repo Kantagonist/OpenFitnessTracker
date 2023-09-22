@@ -7,69 +7,57 @@
 
 import SwiftUI
 
-// MARK: View
-
 /// An entry form which allows the user to enter his strength workout data.
 /// Uses a binding to add to a given list of workouts in the model.
 struct StrengthWorkoutEntryView: View {
 
-    // References the existing central list of workout entries.
-    // This binding is used to manipulate the original source of truth.
-    @Binding var existingEntries: [StrengthWorkoutEntry]
     @Binding var isPresented: Bool
-    let settings: Settings
+    @EnvironmentObject private var viewModel: ViewModel
 
     // Form Entry state variables
     @State private var date = Date()
-    @State private var name = ""
+    @State private var nameIndex = 0
     @State private var reps = 0
     @State private var sets = 0
     @State private var weight: Double = 0.0
+
+    // MARK: View
 
     var body: some View {
         VStack {
             Form {
                 Section(content: {
                     DatePicker("Date:", selection: $date, displayedComponents: .date)
-                        .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                 }, header: {
                     Text("Date")
                 })
                 Section(content: {
-                    Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< settings.strWorkouts.count, id: \.self) { name in
-                            Text(settings.strWorkouts[name])
+                    Picker("Name", selection: $nameIndex, content: {
+                        ForEach(Array(viewModel.settings.strWorkouts.enumerated()), id: \.element) { (index, item) in
+                            Text(item).tag(index)
                         }
                     })
-                    .foregroundColor(settings.textColor)
+                    .foregroundColor(viewModel.settings.textColor)
                     Stepper("Sets: \(sets)", value: $sets, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                     Stepper("Reps: \(reps)", value: $reps, in: 0...Int.max, step: 1)
                         .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(settings.textColor)
-                    Stepper("Weight: \(String(format: "%.1f", weight)) \(settings.weightUnit.rawValue)", value: $weight, in: 0...Double(Int.max), step: 2.5)
+                        .foregroundColor(viewModel.settings.textColor)
+                    Stepper("Weight: \(String(format: "%.1f", weight)) \(viewModel.settings.weightUnit.rawValue)", value: $weight, in: 0...Double(Int.max), step: 2.5)
                     .padding(.top)
                     .padding(.bottom)
-                    .foregroundColor(settings.textColor)
+                    .foregroundColor(viewModel.settings.textColor)
                 }, header: {
                     Text("Entry")
                 })
             }.navigationTitle("New Workout Entry")
                 .fixedSize(horizontal: false, vertical: false)
             Button(action: {
-                existingEntries.append(
-                    StrengthWorkoutEntry(
-                        name: name,
-                        timestamp: date,
-                        sets: sets,
-                        reps: reps,
-                        weight: weight,
-                        recordedWeightUnit: settings.weightUnit
-                    )
-                )
+                createDBEntry()
                 isPresented = false
             }, label: {
                 Text("Submit")
@@ -81,6 +69,20 @@ struct StrengthWorkoutEntryView: View {
                 .cornerRadius(16.0)
                 .padding(.bottom, 16.0)
         }
+    }
+
+    /// Creates a new entry in the persistent DB.
+    /// Based on the data model in the Workouts DB
+    private func createDBEntry() {
+        let dbEntry = StrengthWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
+        dbEntry.id = UUID()
+        dbEntry.name = viewModel.settings.strWorkouts[nameIndex]
+        dbEntry.timestamp = date
+        dbEntry.sets = Int32(sets)
+        dbEntry.reps = Int32(reps)
+        dbEntry.weight = weight
+        dbEntry.recordedWeightUnit = viewModel.settings.weightUnit.rawValue
+        try? viewModel.coreDataPersistenceContainer.viewContext.save()
     }
 }
 
@@ -97,9 +99,8 @@ struct WorkoutEntryView_Previews: PreviewProvider {
 
     static var previews: some View {
         StrengthWorkoutEntryView(
-            existingEntries: $entries,
-            isPresented: $show,
-            settings: settings
+            isPresented: $show
         )
+            .environmentObject(ViewModel.getInstance())
     }
 }

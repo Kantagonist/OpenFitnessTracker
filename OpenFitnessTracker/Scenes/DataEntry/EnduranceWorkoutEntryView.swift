@@ -13,18 +13,14 @@ import SwiftUI
 /// Uses a binding to add to a given list of workouts in the model
 struct EnduranceWorkoutEntryView: View {
 
-    // References the existing central list of workout entries.
-    @Binding var existingEntries: [EnduranceWorkoutEntry]
+    @EnvironmentObject private var viewModel: ViewModel
+
     @Binding var isPresented: Bool
-    let settings: Settings
 
     @State private var date = Date()
-    @State private var name = ""
+    @State private var nameIndex = 0
     private var durationInMilliseconds: UInt64 {
-        get {
-            return UInt64(hours * minutes * seconds * 1_000)
-        }
-        set { _ = newValue }
+        return UInt64(hours * minutes * seconds * 1_000)
     }
     @State private var distance: Double = 0.0
     @State private var seconds: Int = 0
@@ -36,21 +32,21 @@ struct EnduranceWorkoutEntryView: View {
             Form {
                 Section(content: {
                     DatePicker("Date:", selection: $date, displayedComponents: .date)
-                    .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                 }, header: {
                     Text("Date")
                 })
                 Section(content: {
-                    Picker("Name", selection: $name, content: {
-                        ForEach(0 ..< settings.endWorkouts.count, id: \.self) { name in
-                            Text(settings.endWorkouts[name])
+                    Picker("Name", selection: $nameIndex, content: {
+                        ForEach(Array(viewModel.settings.endWorkouts.enumerated()), id: \.element) { (index, item) in
+                            Text(item).tag(index)
                         }
                     })
-                    .foregroundColor(settings.textColor)
-                    Stepper("Distance: \(String(format: "%.1f", distance)) \(settings.distanceUnit.rawValue)", value: $distance, in: 0...Double(Int.max), step: enduranceLengthIncrement)
+                    .foregroundColor(viewModel.settings.textColor)
+                    Stepper("Distance: \(String(format: "%.1f", distance)) \(viewModel.settings.distanceUnit.rawValue)", value: $distance, in: 0...Double(Int.max), step: enduranceLengthIncrement)
                     .padding(.top)
                         .padding(.bottom)
-                        .foregroundColor(settings.textColor)
+                        .foregroundColor(viewModel.settings.textColor)
                     VStack {
                         Text("Time")
                         HStack(alignment: .center, spacing: 0) {
@@ -85,15 +81,7 @@ struct EnduranceWorkoutEntryView: View {
             }
             .navigationTitle("New Workout Entry")
             Button(action: {
-                existingEntries.append(
-                    EnduranceWorkoutEntry(
-                        name: name,
-                        timestamp: date,
-                        durationInMilliseconds: durationInMilliseconds,
-                        distance: distance,
-                        recordedDistanceUnit: settings.distanceUnit
-                    )
-                )
+                createDBEntry()
                 isPresented = false
             }, label: {
                 Text("Submit")
@@ -106,6 +94,19 @@ struct EnduranceWorkoutEntryView: View {
                 .padding(.bottom, 16.0)
         }
     }
+
+    /// Creates a new entry in the persistent DB.
+    /// Based on the data model in the Workouts DB
+    private func createDBEntry() {
+        let dbEntry = EnduranceWorkoutEntryDB(context: viewModel.coreDataPersistenceContainer.viewContext)
+        dbEntry.id = UUID()
+        dbEntry.name = viewModel.settings.endWorkouts[nameIndex]
+        dbEntry.timestamp = date
+        dbEntry.durationInMilliseconds = Int64(durationInMilliseconds)
+        dbEntry.distance = distance
+        dbEntry.recordedDistanceUnit = viewModel.settings.distanceUnit.rawValue
+        try? viewModel.coreDataPersistenceContainer.viewContext.save()
+    }
 }
 
 // MARK: Configs
@@ -116,14 +117,12 @@ private let enduranceLengthIncrement: Double = 0.1
 
 struct EnduranceWorkoutEntryView_Previews: PreviewProvider {
 
-    @State private static var entries = [EnduranceWorkoutEntry]()
     @State private static var show = true
 
     static var previews: some View {
         EnduranceWorkoutEntryView(
-            existingEntries: $entries,
-            isPresented: $show,
-            settings: Settings()
+            isPresented: $show
         )
+            .environmentObject(ViewModel.getInstance())
     }
 }
