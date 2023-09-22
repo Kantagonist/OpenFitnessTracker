@@ -60,14 +60,12 @@ class ViewModel: ObservableObject {
     // MARK: Values
 
     var strengthWorkoutEntries = [StrengthWorkoutEntry]()
-    @Published var enduranceWorkoutEntries = [EnduranceWorkoutEntry]()
+    var enduranceWorkoutEntries = [EnduranceWorkoutEntry]()
     @Published var settings = Settings()
 
     // MARK: Data Query Handling
 
     let coreDataPersistenceContainer = NSPersistentContainer(name: "Workouts")
-
-    @FetchRequest(sortDescriptors: []) var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
 
     // MARK: Misc Data Getters
 

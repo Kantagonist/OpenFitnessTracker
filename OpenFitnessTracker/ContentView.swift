@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// Central scene host which holds the scene container.
 struct ContentView: View {
 
     @StateObject private var model = ViewModel.getInstance()
@@ -14,6 +15,7 @@ struct ContentView: View {
     var body: some View {
         TabCollection()
             .environmentObject(model)
+            .environment(\.managedObjectContext, model.coreDataPersistenceContainer.viewContext) // necessary for DB access.
     }
 }
 

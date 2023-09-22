@@ -9,6 +9,20 @@ import SwiftUI
 
 /// Scene which allows the user to input data into the system
 struct WorkoutInputSceneView: View {
+    
+    // MARK: Data requests
+
+    /// Data request for all strength workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: [
+        NSSortDescriptor(key: "timestamp", ascending: false)
+    ]) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
+    
+    /// Data request for all endurance workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: [
+        NSSortDescriptor(key: "timestamp", ascending: false)
+    ]) private var enduranceWorkouts: FetchedResults<EnduranceWorkoutEntryDB>
+
+    // MARK: State objects
 
     /// Source of truth for workout-entries
     @EnvironmentObject private var viewModel: ViewModel
@@ -16,6 +30,8 @@ struct WorkoutInputSceneView: View {
     @State private var isShowingEntryForm = false
     /// Shows which entries to show
     @State private var entryShown: EntryType = .strength
+
+    // MARK: View
 
     var body: some View {
         ZStack {
@@ -33,13 +49,13 @@ struct WorkoutInputSceneView: View {
                     // Render chosen entries
                     switch entryShown {
                     case .strength:
-                        if viewModel.strengthWorkouts.isEmpty {
+                        if strengthWorkouts.isEmpty {
                             HStack {
                                 Text("No Entries Yet...")
                                 Spacer()
                             }
                         } else {
-                            ForEach(viewModel.strengthWorkouts) { strengthWorkoutEntry in
+                            ForEach(strengthWorkouts) { strengthWorkoutEntry in
                                 StrengthEntryBoxView(
                                     entry: strengthWorkoutEntry.convertToDomainVersion()
                                 )
