@@ -5,16 +5,23 @@ I use this project to teach myself SwiftUI.
 
 ## Change Log
 
-0.0.3:
-- support for swiftlint
+### 0.1.0:
+- Switched ViewModel access to environment object logic
+- Replaced published workouts by CoreData fetch request
+-- Users can now store workouts in persistence locally
+- Bugfix: Implemented scheme and property list to silence warnings
+- Bugifx: Workout entries now show the name
+
+### 0.0.3:
+- Support for swiftlint
 - Personal info page is now a statistics overview
 
-0.0.2:
-- fixed Settings and expanded
+### 0.0.2:
+- Fixed Settings and expanded
 - User can add and delete workouts
 - UI Improvement for data entries
 
-0.0.1:
+### 0.0.1:
 - Basic functionality for inputting workouts at runtime
 - Popover screens for workout input
 - Screen ot display of workouts
