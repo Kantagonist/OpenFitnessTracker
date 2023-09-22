@@ -82,7 +82,7 @@ struct StrengthWorkoutEntryView: View {
         dbEntry.reps = Int32(reps)
         dbEntry.weight = weight
         dbEntry.recordedWeightUnit = viewModel.settings.weightUnit.rawValue
-        try! viewModel.coreDataPersistenceContainer.viewContext.save()
+        try? viewModel.coreDataPersistenceContainer.viewContext.save()
     }
 }
 

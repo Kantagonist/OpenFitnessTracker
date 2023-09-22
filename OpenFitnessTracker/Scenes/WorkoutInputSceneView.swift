@@ -9,14 +9,14 @@ import SwiftUI
 
 /// Scene which allows the user to input data into the system
 struct WorkoutInputSceneView: View {
-    
+
     // MARK: Data requests
 
     /// Data request for all strength workouts inside the DB, ordered by newest date.
     @FetchRequest(sortDescriptors: [
         NSSortDescriptor(key: "timestamp", ascending: false)
     ]) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
-    
+
     /// Data request for all endurance workouts inside the DB, ordered by newest date.
     @FetchRequest(sortDescriptors: [
         NSSortDescriptor(key: "timestamp", ascending: false)

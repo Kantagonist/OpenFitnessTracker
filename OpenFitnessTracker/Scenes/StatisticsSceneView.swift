@@ -16,12 +16,12 @@ struct StatisticsSceneView: View {
     @FetchRequest(sortDescriptors: [
         NSSortDescriptor(key: "timestamp", ascending: true)
     ]) private var strengthWorkoutsFromDB: FetchedResults<StrengthWorkoutEntryDB>
-    
+
     /// Data request for all endurance workouts inside the DB, ordered by oldest date.
     @FetchRequest(sortDescriptors: [
         NSSortDescriptor(key: "timestamp", ascending: true)
     ]) private var enduranceWorkoutsFromDB: FetchedResults<EnduranceWorkoutEntryDB>
-    
+
     // MARK: State bjects
 
     @EnvironmentObject private var viewModel: ViewModel

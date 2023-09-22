@@ -105,7 +105,7 @@ struct EnduranceWorkoutEntryView: View {
         dbEntry.durationInMilliseconds = Int64(durationInMilliseconds)
         dbEntry.distance = distance
         dbEntry.recordedDistanceUnit = viewModel.settings.distanceUnit.rawValue
-        try! viewModel.coreDataPersistenceContainer.viewContext.save()
+        try? viewModel.coreDataPersistenceContainer.viewContext.save()
     }
 }
 

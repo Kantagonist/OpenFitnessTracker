@@ -25,7 +25,7 @@ class ViewModel: ObservableObject {
     }
 
     init() {
-        coreDataPersistenceContainer.loadPersistentStores { description, error in
+        coreDataPersistenceContainer.loadPersistentStores { _, error in
             if let error = error {
                 print("Core Data failed to load: \(error.localizedDescription)")
             }

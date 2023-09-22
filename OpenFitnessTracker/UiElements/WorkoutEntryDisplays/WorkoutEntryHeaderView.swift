@@ -12,7 +12,7 @@ struct WorkoutEntryHeaderView: View {
 
     /// Data request for all strength workouts inside the DB, ordered by newest date.
     @FetchRequest(sortDescriptors: []) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
-    
+
     /// Data request for all endurance workouts inside the DB, ordered by newest date.
     @FetchRequest(sortDescriptors: []) private var enduranceWorkouts: FetchedResults<EnduranceWorkoutEntryDB>
 
@@ -43,7 +43,12 @@ struct WorkoutEntryHeaderView: View {
                     }
                     .padding(10.0)
                     .background(viewModel.settings.headerBackgroundColor)
-                    .shadow(color: viewModel.settings.headerBackgroundColor, radius: 10, x: 0, y: 0)
+                    .shadow(
+                        color: viewModel.settings.headerBackgroundColor,
+                        radius: 10,
+                        x: 0,
+                        y: 0
+                    )
                     Spacer()
                         .frame(width: 20)
                 }
@@ -69,19 +74,15 @@ struct WorkoutEntryHeaderView: View {
     /// Deletes the given entry from the DB.
     /// - Parameter id: The UUID of the entry to delete
     private func deleteEntryFromDB(with id: UUID) {
-        for entry in strengthWorkouts {
-            if entry.id == id {
-                viewModel.coreDataPersistenceContainer.viewContext.delete(entry)
-                try! viewModel.coreDataPersistenceContainer.viewContext.save()
-                return
-            }
+        for entry in strengthWorkouts where entry.id == id {
+            viewModel.coreDataPersistenceContainer.viewContext.delete(entry)
+            try? viewModel.coreDataPersistenceContainer.viewContext.save()
+            return
         }
-        for entry in enduranceWorkouts {
-            if entry.id == id {
-                viewModel.coreDataPersistenceContainer.viewContext.delete(entry)
-                try! viewModel.coreDataPersistenceContainer.viewContext.save()
-                return
-            }
+        for entry in enduranceWorkouts where entry.id == id {
+            viewModel.coreDataPersistenceContainer.viewContext.delete(entry)
+            try? viewModel.coreDataPersistenceContainer.viewContext.save()
+            return
         }
     }
 }
