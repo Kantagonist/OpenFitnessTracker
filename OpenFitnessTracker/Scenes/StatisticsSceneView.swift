@@ -15,19 +15,26 @@ struct StatisticsSceneView: View {
     /// Data request for all strength workouts inside the DB, ordered by oldest date.
     @FetchRequest(sortDescriptors: [
         NSSortDescriptor(key: "timestamp", ascending: true)
-    ]) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
+    ]) private var strengthWorkoutsFromDB: FetchedResults<StrengthWorkoutEntryDB>
     
     /// Data request for all endurance workouts inside the DB, ordered by oldest date.
     @FetchRequest(sortDescriptors: [
         NSSortDescriptor(key: "timestamp", ascending: true)
-    ]) private var enduranceWorkouts: FetchedResults<EnduranceWorkoutEntryDB>
-
+    ]) private var enduranceWorkoutsFromDB: FetchedResults<EnduranceWorkoutEntryDB>
     
     // MARK: State bjects
 
     @EnvironmentObject private var viewModel: ViewModel
 
     @State private var presentPopover = false
+
+    /// Cache model to hold domain versions of workouts.
+    /// used for optimization to prevent multiple pointless fetch requests.
+    private class CacheDomainModel: ObservableObject {
+        var strengthWorkouts = [StrengthWorkoutEntry]()
+        var enduranceWorkouts = [EnduranceWorkoutEntry]()
+    }
+    @ObservedObject private var cacheModel = CacheDomainModel()
 
     // MARK: View
 
@@ -90,18 +97,32 @@ struct StatisticsSceneView: View {
             .foregroundColor(viewModel.settings.textColor)
             .navigationBarTitle("Statistics")
         }
+        .onAppear {
+            fetchData()
+        }
     }
 
     // MARK: Misc Data Getters
+
+    /// Central call to fetch data from the DB.
+    /// Caches domain versions as domain variables to prevent mutliple unnecessary DB calls.
+    private func fetchData() {
+        strengthWorkoutsFromDB.forEach { workout in
+            cacheModel.strengthWorkouts.append(workout.convertToDomainVersion())
+        }
+        enduranceWorkoutsFromDB.forEach { workout in
+            cacheModel.enduranceWorkouts.append(workout.convertToDomainVersion())
+        }
+    }
 
     /// Gets the highest possible weight for the given name.
     /// - Parameters:
     ///  - name the name of the exercise to check
     /// - Returns: the highest known value or 0 if none exists.
-    func getHighestStrengthWeight(for name: String) -> Double {
+    private func getHighestStrengthWeight(for name: String) -> Double {
         var result: Double = 0
-        for entry in strengthWorkouts {
-            let distance = entry.convertToDomainVersion().getConvertedWeightUnit(
+        for entry in cacheModel.strengthWorkouts {
+            let distance = entry.getConvertedWeightUnit(
                 for: viewModel.settings.weightUnit
             )
             if distance > result {
@@ -117,8 +138,8 @@ struct StatisticsSceneView: View {
     /// - Returns: the highest known value or 0 if none exists.
     private func getHighestEnduranceDistance(for name: String) -> Double {
         var result: Double = 0
-        for entry in enduranceWorkouts {
-            let distance = entry.convertToDomainVersion().getConvertedDistanceUnit(
+        for entry in cacheModel.enduranceWorkouts {
+            let distance = entry.getConvertedDistanceUnit(
                 for: viewModel.settings.distanceUnit
             )
             if distance > result {
@@ -130,24 +151,24 @@ struct StatisticsSceneView: View {
 
     /// Sorts all entries by date and returns in ascending order.
     /// - Returns: A list of workouts in ascending order in domain version
-    func getAllWorkoutsSortedByDate() -> [WorkoutEntry] {
+    private func getAllWorkoutsSortedByDate() -> [WorkoutEntry] {
         var result = [WorkoutEntry]()
-        enduranceWorkouts.forEach { workout in
-            result.append(workout.convertToDomainVersion())
+        cacheModel.enduranceWorkouts.forEach { workout in
+            result.append(workout)
         }
-        strengthWorkouts.forEach { workout in
-            result.append(workout.convertToDomainVersion())
+        cacheModel.strengthWorkouts.forEach { workout in
+            result.append(workout)
         }
         return result
     }
 
     /// Creates a list of strength workouts with the given name in ascending date order.
     ///  - Returns: The workout list in domain form.
-    func getStrengthWorkouts(with name: String) -> [StrengthWorkoutEntry] {
+    private func getStrengthWorkouts(with name: String) -> [StrengthWorkoutEntry] {
         var result = [StrengthWorkoutEntry]()
-        strengthWorkouts.forEach { workout in
+        cacheModel.strengthWorkouts.forEach { workout in
             if name == workout.name {
-                result.append(workout.convertToDomainVersion())
+                result.append(workout)
             }
         }
         return result
@@ -155,11 +176,11 @@ struct StatisticsSceneView: View {
 
     /// Creates a list of endurance workouts with the given name in ascending date order.
     ///  - Returns: The workout list in domain form.
-    func getEnduranceWorkouts(with name: String) -> [EnduranceWorkoutEntry] {
+    private func getEnduranceWorkouts(with name: String) -> [EnduranceWorkoutEntry] {
         var result = [EnduranceWorkoutEntry]()
-        enduranceWorkouts.forEach { workout in
+        cacheModel.enduranceWorkouts.forEach { workout in
             if name == workout.name {
-                result.append(workout.convertToDomainVersion())
+                result.append(workout)
             }
         }
         return result
