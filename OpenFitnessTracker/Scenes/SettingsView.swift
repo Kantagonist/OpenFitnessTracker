@@ -10,7 +10,7 @@ import SwiftUI
 /// new settings page, which allows for
 struct SettingsView: View {
 
-    @StateObject private var viewModel = ViewModel.getInstance()
+    @EnvironmentObject private var viewModel: ViewModel
     @State private var presentPopOver = false
 
     // MARK: Main View
@@ -60,5 +60,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(ViewModel.getInstance())
     }
 }

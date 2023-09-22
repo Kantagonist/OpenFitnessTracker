@@ -10,10 +10,25 @@ import SwiftUI
 /// Page which displays certain user statistics pulled form existing workouts
 struct StatisticsSceneView: View {
 
-    @StateObject private var viewModel = ViewModel.getInstance()
+    // MARK: Data requests
+
+    /// Data request for all strength workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: [
+        NSSortDescriptor(key: "timestamp", ascending: false)
+    ]) private var strengthWorkouts: FetchedResults<StrengthWorkoutEntryDB>
+    
+    /// Data request for all endurance workouts inside the DB, ordered by newest date.
+    @FetchRequest(sortDescriptors: [
+        NSSortDescriptor(key: "timestamp", ascending: false)
+    ]) private var enduranceWorkouts: FetchedResults<EnduranceWorkoutEntryDB>
+
+    // MARK: State bjects
+
+    @EnvironmentObject private var viewModel: ViewModel
+
     @State private var presentPopover = false
 
-    // MARK: Main View
+    // MARK: View
 
     var body: some View {
 
@@ -84,5 +99,6 @@ struct StatisticsSceneView: View {
 struct PersonalInformationSceneView_Previews: PreviewProvider {
     static var previews: some View {
         StatisticsSceneView()
+            .environmentObject(ViewModel.getInstance())
     }
 }

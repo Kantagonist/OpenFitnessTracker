@@ -26,6 +26,7 @@ struct WorkoutInputSceneView: View {
 
     /// Source of truth for workout-entries
     @EnvironmentObject private var viewModel: ViewModel
+
     /// Boolean to control popover workout entry screen trigger
     @State private var isShowingEntryForm = false
     /// Shows which entries to show
