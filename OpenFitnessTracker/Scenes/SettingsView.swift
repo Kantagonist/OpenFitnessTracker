@@ -12,7 +12,10 @@ import CoreData
 struct SettingsView: View {
 
     @EnvironmentObject private var viewModel: ViewModel
+
     @State private var presentPopOver = false
+    @State private var name = ""
+    @State private var presentNameChangeDialog = false
 
     // MARK: Main View
 
@@ -20,7 +23,14 @@ struct SettingsView: View {
         NavigationView {
             List {
                 Section(header: Text("Profile")) {
-                    Label("\(viewModel.settings.person.name)", image: viewModel.settings.person.fotoName)
+                    Label(name, image: viewModel.settings.person.fotoName)
+                        .onTapGesture {
+                            presentNameChangeDialog = true
+                        }
+                        .alert("Enter your Name", isPresented: $presentNameChangeDialog) {
+                            TextField("", text: $name)
+                                .autocorrectionDisabled(true)
+                        }
                     DatePicker("Birthdate", selection: $viewModel.settings.person.birthdate, displayedComponents: .date)
                 }
 
@@ -63,6 +73,9 @@ struct SettingsView: View {
             }
             .foregroundColor(viewModel.settings.textColor)
             .navigationBarTitle("Settings")
+        }
+        .onAppear {
+            name = viewModel.settings.person.name
         }
     }
 }
