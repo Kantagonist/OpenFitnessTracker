@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 /// new settings page, which allows for
 struct SettingsView: View {
@@ -18,11 +19,10 @@ struct SettingsView: View {
     var body: some View {
         NavigationView {
             List {
-
                 Section(header: Text("Profile")) {
                     Label("\(viewModel.settings.person.name)", image: viewModel.settings.person.fotoName)
                     DatePicker("Birthdate", selection: $viewModel.settings.person.birthdate, displayedComponents: .date)
-                }.foregroundColor(viewModel.settings.textColor)
+                }
 
                 Section(header: Text("General")) {
                     Picker("Weight Unit", selection: $viewModel.settings.weightUnit, content: {
@@ -36,7 +36,7 @@ struct SettingsView: View {
                         }
                     })
                     ColorPicker("Text color", selection: $viewModel.settings.textColor)
-                }.foregroundColor(viewModel.settings.textColor)
+                }
 
                 Section(header: Text("Workouts")) {
                     Button("Change Workouts") {
@@ -48,8 +48,20 @@ struct SettingsView: View {
                         }
                     })
                 }
+                Button("Save Settings") {
+                    let dbSettings = SettingsDB(context: viewModel.coreDataPersistenceContainer.viewContext)
+                    dbSettings.birthdate = viewModel.settings.person.birthdate
+                    dbSettings.distanceUnit = viewModel.settings.distanceUnit.rawValue
+                    dbSettings.enduranceWorkouts = viewModel.settings.endWorkouts as NSObject
+                    dbSettings.fotoName = viewModel.settings.person.fotoName
+                    dbSettings.name = viewModel.settings.person.name
+                    dbSettings.strengthWorkouts = viewModel.settings.strWorkouts as NSObject
+                    dbSettings.weightUnit = viewModel.settings.weightUnit.rawValue
+                    try? viewModel.coreDataPersistenceContainer.viewContext.save()
+                }.foregroundColor(.blue)
 
             }
+            .foregroundColor(viewModel.settings.textColor)
             .navigationBarTitle("Settings")
         }
     }

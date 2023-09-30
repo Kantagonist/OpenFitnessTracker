@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-/// Struct which holds the current settings.
+/// Domain-level struct which holds the current settings.
 struct Settings {
     var person = Person(
         fotoName: "person_icon",
@@ -54,4 +54,20 @@ enum WeightUnit: String, CaseIterable {
 enum DistanceUnit: String, CaseIterable {
     case km
     case mile
+}
+
+extension SettingsDB {
+    func getDomainVersion() -> Settings {
+        Settings(
+            person: Person(
+                fotoName: fotoName!,
+                name: name!,
+                birthdate: birthdate!
+            ),
+            weightUnit: WeightUnit(rawValue: weightUnit!)!,
+            distanceUnit: DistanceUnit(rawValue: distanceUnit!)!,
+            strWorkouts: strengthWorkouts as! [String],
+            endWorkouts: enduranceWorkouts as! [String]
+        )
+    }
 }

@@ -22,6 +22,11 @@ struct ContentView: View {
 /// Mother view which holds all the existing tabs
 struct TabCollection: View {
 
+    /// Data request for the stored app settings
+    @FetchRequest(sortDescriptors: []) private var settingsFromDB: FetchedResults<SettingsDB>
+    
+    @EnvironmentObject private var viewModel: ViewModel
+
     var body: some View {
         TabView {
             WorkoutInputSceneView()
@@ -36,6 +41,10 @@ struct TabCollection: View {
                 .tabItem {
                     Label("Settings", systemImage: "3.circle")
                 }
+        }.onAppear {
+            if !settingsFromDB.isEmpty {
+                viewModel.settings = settingsFromDB[0].getDomainVersion()
+            }
         }
     }
 }

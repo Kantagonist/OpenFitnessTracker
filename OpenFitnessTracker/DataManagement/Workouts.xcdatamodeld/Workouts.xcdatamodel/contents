@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="21G816" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="EnduranceWorkoutEntryDB" representedClassName="EnduranceWorkoutEntryDB" syncable="YES" codeGenerationType="class">
         <attribute name="distance" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="durationInMilliseconds" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -7,6 +7,15 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="recordedDistanceUnit" optional="YES" attributeType="String"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+    </entity>
+    <entity name="SettingsDB" representedClassName="SettingsDB" syncable="YES" codeGenerationType="class">
+        <attribute name="birthdate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="distanceUnit" optional="YES" attributeType="String"/>
+        <attribute name="enduranceWorkouts" optional="YES" attributeType="Transformable"/>
+        <attribute name="fotoName" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="strengthWorkouts" optional="YES" attributeType="Transformable"/>
+        <attribute name="weightUnit" optional="YES" attributeType="String"/>
     </entity>
     <entity name="StrengthWorkoutEntryDB" representedClassName="StrengthWorkoutEntryDB" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
