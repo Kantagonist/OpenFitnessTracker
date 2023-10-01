@@ -11,6 +11,9 @@ import CoreData
 /// new settings page, which allows for
 struct SettingsView: View {
 
+    /// Data request for the stored app settings, used for deletion
+    @FetchRequest(sortDescriptors: []) private var settingsFromDB: FetchedResults<SettingsDB>
+
     @EnvironmentObject private var viewModel: ViewModel
 
     @State private var presentPopOver = false
@@ -59,6 +62,11 @@ struct SettingsView: View {
                     })
                 }
                 Button("Save Settings") {
+                    // delete old settings
+                    for settings in settingsFromDB {
+                        viewModel.coreDataPersistenceContainer.viewContext.delete(settings)
+                    }
+                    // create new entry
                     let dbSettings = SettingsDB(context: viewModel.coreDataPersistenceContainer.viewContext)
                     dbSettings.birthdate = viewModel.settings.person.birthdate
                     dbSettings.distanceUnit = viewModel.settings.distanceUnit.rawValue
